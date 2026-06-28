@@ -1,0 +1,18 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "sl-journeys",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "5588"],
+      "port": 5588
+    },
+    {
+      "name": "next",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "start"],
+      "cwd": "nextJS",
+      "port": 3000
+    }
+  ]
+}

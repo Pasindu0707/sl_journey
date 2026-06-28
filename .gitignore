@@ -1,0 +1,17 @@
+# Node / Next.js (the nextJS/ app)
+node_modules/
+nextJS/node_modules/
+nextJS/.next/
+nextJS/out/
+nextJS/next-env.d.ts
+
+# Build / OS / editor noise
+*.log
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Local env files
+.env*
+!.env.example
