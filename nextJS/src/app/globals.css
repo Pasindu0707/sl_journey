@@ -431,6 +431,9 @@ font[style]{background:transparent!important;box-shadow:none!important}
 .form-msg{margin-top:14px;padding:14px 16px;border-radius:var(--radius-sm);font-size:.9rem;display:none}
 .form-msg.show{display:block}
 .form-msg.ok{background:rgba(34,160,90,.1);color:#1d7a45;border:1px solid rgba(34,160,90,.25)}
+.form-msg.warn{background:rgba(214,150,20,.1);color:#8a5d05;border:1px solid rgba(214,150,20,.3)}
+.form-msg__actions{display:flex;gap:10px;flex-wrap:wrap}
+.form-msg__actions .btn{flex:1 1 auto;justify-content:center}
 
 /* contact info list */
 .contact-list{display:flex;flex-direction:column;gap:22px;margin-top:8px}
