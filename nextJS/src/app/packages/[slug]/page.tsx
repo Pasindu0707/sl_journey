@@ -1,11 +1,15 @@
 import type { Metadata } from "next";
+import ReactDOM from "react-dom";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Ic from "@/components/Ic";
 import EnquiryForm from "@/components/EnquiryForm";
+import JsonLd from "@/components/JsonLd";
 import { CtaBand } from "@/components/cards";
-import { PACKAGES, img } from "@/data/content";
-import { waLink } from "@/data/site";
+import { PACKAGES, img, priceLabel } from "@/data/content";
+import { dims } from "@/data/image-dims";
+import { breadcrumbSchema, packageSchema } from "@/lib/schema";
+import { BRAND, waLink } from "@/data/site";
 
 export function generateStaticParams() {
   return PACKAGES.map((p) => ({ slug: p.slug }));
@@ -17,7 +21,11 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   return {
     title: `${p.name} — ${p.dur}`,
     description: p.intro.slice(0, 155),
-    openGraph: { images: [`/assets/img/lib/${p.hero}.jpg`] },
+    alternates: { canonical: `/packages/${p.slug}/` },
+    openGraph: {
+      url: `/packages/${p.slug}/`,
+      images: [`/assets/img/lib/${p.hero}.jpg`],
+    },
   };
 }
 
@@ -25,12 +33,30 @@ export default function PackagePage({ params }: { params: { slug: string } }) {
   const p = PACKAGES.find((x) => x.slug === params.slug);
   if (!p) notFound();
 
+  ReactDOM.preload(img(p.hero), { as: "image", fetchPriority: "high" });
+
   return (
     <main id="main">
+      <JsonLd data={packageSchema(p)} />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Tour Packages", path: "/#packages" },
+          { name: p.name, path: `/packages/${p.slug}/` },
+        ])}
+      />
       <section className="subhero">
         <div className="subhero__bg">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={img(p.hero)} alt={p.name} />
+          <img
+            src={img(p.hero)}
+            alt={p.name}
+            fetchPriority="high"
+            loading="eager"
+            decoding="async"
+            width={dims(p.hero)[0]}
+            height={dims(p.hero)[1]}
+          />
         </div>
         <div className="container subhero__inner">
           <div className="crumb">
@@ -40,7 +66,7 @@ export default function PackagePage({ params }: { params: { slug: string } }) {
           <div className="pkg-meta">
             <span className="chip"><Ic name="clock" /> {p.dur}</span>
             <span className="chip"><Ic name="pin" /> {p.attractions.length} Destinations</span>
-            <span className="chip"><Ic name="calendar" /> {p.price}</span>
+            <span className="chip"><Ic name="calendar" /> {priceLabel(p)}</span>
           </div>
         </div>
       </section>
@@ -65,7 +91,7 @@ export default function PackagePage({ params }: { params: { slug: string } }) {
               </div>
 
               <div style={{ marginTop: 38, display: "flex", gap: 14, flexWrap: "wrap" }}>
-                <a className="btn btn--primary" href={waLink(`Hi SL Journey! I'm interested in the ${p.name} tour (${p.dur}).`)} target="_blank" rel="noopener noreferrer">
+                <a className="btn btn--primary" href={waLink(`Hi ${BRAND}! I'm interested in the ${p.name} tour (${p.dur}).`)} target="_blank" rel="noopener noreferrer">
                   <Ic name="whatsapp" /> Ask About This Tour
                 </a>
                 <Link className="btn btn--ghost" href="/#packages">View Other Tours</Link>

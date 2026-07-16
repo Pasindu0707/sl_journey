@@ -8,11 +8,24 @@ export type Package = {
   days: string;
   img: string;
   hero: string;
-  price: string;
+  /** Lead-in price in USD. Kept numeric so Offer schema can use it directly. */
+  priceUSD: number;
+  /** "pp" = per person; "couple" = total for two. Honeymoon Vibes is per couple. */
+  priceUnit: "pp" | "couple";
   route: string;
   intro: string;
   attractions: string[];
 };
+
+/** Display price, e.g. "From $640 pp" / "From $1,690 / couple". */
+export const priceLabel = (p: Package) =>
+  `From $${p.priceUSD.toLocaleString("en-US")} ${
+    p.priceUnit === "couple" ? "/ couple" : "pp"
+  }`;
+
+/** Spells out the pricing basis for schema descriptions, which have no context. */
+export const priceBasis = (p: Package) =>
+  p.priceUnit === "couple" ? "per couple" : "per person";
 
 export const PACKAGES: Package[] = [
   {
@@ -22,7 +35,8 @@ export const PACKAGES: Package[] = [
     days: "4 Days · 3 Nights",
     img: "train-ella",
     hero: "nuwara-eliya",
-    price: "From $640 pp",
+    priceUSD: 640,
+    priceUnit: "pp",
     route: "Pinnawala · Kandy · Peradeniya · Nuwara Eliya · Kithulgala · Colombo",
     intro:
       "Discover the magic of Sri Lanka's hill country on a journey filled with beauty, culture, and adventure. Witness the charm of gentle elephants at Pinnawala, pay homage at the Temple of the Sacred Tooth Relic, and wander through lush botanical gardens. Savour the taste of world-famous Ceylon tea, experience the thrill of white-water rafting in Kithulgala, and wrap up your adventure with an exciting tour of Colombo. A perfect escape for those who love both nature and adrenaline.",
@@ -39,7 +53,8 @@ export const PACKAGES: Package[] = [
     days: "10 Days · 9 Nights",
     img: "sigiriya",
     hero: "anuradhapura",
-    price: "From $1,490 pp",
+    priceUSD: 1490,
+    priceUnit: "pp",
     route: "Pinnawala · Sigiriya · Dambulla · Polonnaruwa · Anuradhapura · Kandy · Nuwara Eliya · Ella · Yala · Mirissa · Galle · Colombo",
     intro:
       "Step into Sri Lanka's living heritage with a ten-day cultural odyssey that captures the island's true spirit. Journey through the ancient cities of Anuradhapura and Polonnaruwa, marvel at the rock fortress of Sigiriya, and soak in the scenic beauty of Ella. Ride the world-famous hill country train, explore sacred temples, and witness the vibrant rhythms of traditional dance. Round off your experience with the wild charm of Yala and the serene beaches of the southern coast. This is more than a holiday — it's a cultural odyssey through Sri Lanka's timeless wonders.",
@@ -61,7 +76,8 @@ export const PACKAGES: Package[] = [
     days: "8 Days · 7 Nights",
     img: "beach-boats",
     hero: "galle-fort",
-    price: "From $1,180 pp",
+    priceUSD: 1180,
+    priceUnit: "pp",
     route: "Colombo · Balapitiya · Bentota · Hikkaduwa · Galle · Mirissa · Hiriketiya",
     intro:
       "Uncover the tropical beauty of Sri Lanka's southern coast on this unforgettable eight-day journey. Start with the buzzing energy of Colombo and the iconic Lotus Tower before gliding along the tranquil waters of the Madu River. Explore historic coastal forts, relax on golden beaches, and dive into adventure with water sports and whale watching. Along the way, witness traditions like stilt fishing that keep the island's coastal culture alive. A perfect blend of sunshine, adventure, and heritage for every traveller.",
@@ -79,7 +95,8 @@ export const PACKAGES: Package[] = [
     days: "9 Days · 8 Nights",
     img: "beach-sunset",
     hero: "beach-sunset",
-    price: "From $1,690 / couple",
+    priceUSD: 1690,
+    priceUnit: "couple",
     route: "Pinnawala · Sigiriya · Kandy · Nuwara Eliya · Ella · Yala · Mirissa · Galle · Balapitiya · Colombo",
     intro:
       "Begin your new journey together with a romantic escape through Sri Lanka's most dreamy landscapes. Share scenic train rides, drift across peaceful lakes, and embrace the lively charm of Ella, Mirissa, Galle, and Colombo. Discover wonders like Sigiriya and Yala, indulge in golden beach sunsets, and enjoy moments of adventure, culture, and pure relaxation. Designed for couples, this tour is all about creating timeless memories in paradise.",
@@ -137,21 +154,46 @@ export type Post = {
   slug: string;
   title: string;
   img: string;
-  date: [string, string];
-  dateLong: string;
+  /**
+   * Publication date, ISO 8601 (YYYY-MM-DD). Drives both the visible date and
+   * BlogPosting.datePublished, so the two can never drift apart.
+   *
+   * TODO: confirm the real publication dates. The old static site rendered
+   * "12 Sep" with no year on all four posts, so the year below is a placeholder
+   * and every post currently shares one date — which reads as bulk-published to
+   * Google. Give me the real dates and I will drop them straight in.
+   */
+  date: string;
   excerpt: string;
   prev?: [string, string];
   next?: [string, string];
   body: Block[];
 };
 
+// Parsed as UTC so the rendered date can't shift a day by the build machine's
+// timezone (a static export bakes in whatever the builder resolved).
+const asUTC = (iso: string) => new Date(`${iso}T00:00:00Z`);
+
+/** ["12", "Sep"] — the stacked date badge on post cards. */
+export const dateParts = (iso: string): [string, string] => [
+  String(asUTC(iso).getUTCDate()),
+  asUTC(iso).toLocaleString("en-GB", { month: "short", timeZone: "UTC" }),
+];
+
+/** "12 September" — the pill on the post page. */
+export const dateLong = (iso: string) =>
+  asUTC(iso).toLocaleString("en-GB", {
+    day: "numeric",
+    month: "long",
+    timeZone: "UTC",
+  });
+
 export const BLOG: Post[] = [
   {
     slug: "best-time",
     title: "Best Time to Visit Sri Lanka",
     img: "ella-ninearch",
-    date: ["12", "Sep"],
-    dateLong: "12 September",
+    date: "2025-09-12",
     excerpt: "A year-round island with two monsoons — here's how to pick the perfect season for your coast and your kind of adventure.",
     next: ["cuisine", "Sri Lankan Cuisine: A Taste of Authentic Flavours"],
     body: [
@@ -167,8 +209,7 @@ export const BLOG: Post[] = [
     slug: "cuisine",
     title: "Sri Lankan Cuisine: A Taste of Authentic Flavours",
     img: "cuisine",
-    date: ["12", "Sep"],
-    dateLong: "12 September",
+    date: "2025-09-12",
     excerpt: "Spices, coconut and rice come together in one of Asia's most underrated food cultures. These are the dishes you simply must try.",
     prev: ["best-time", "Best Time to Visit Sri Lanka"],
     next: ["things-to-do", "Top Things to Do in Sri Lanka"],
@@ -187,8 +228,7 @@ export const BLOG: Post[] = [
     slug: "things-to-do",
     title: "Top Things to Do in Sri Lanka",
     img: "sigiriya",
-    date: ["12", "Sep"],
-    dateLong: "12 September",
+    date: "2025-09-12",
     excerpt: "From ancient rock fortresses to leopard safaris and the world's most scenic train ride — the experiences that define the island.",
     prev: ["cuisine", "Sri Lankan Cuisine: A Taste of Authentic Flavours"],
     next: ["discover", "Discover Sri Lanka: The Pearl of the Indian Ocean"],
@@ -207,8 +247,7 @@ export const BLOG: Post[] = [
     slug: "discover",
     title: "Discover Sri Lanka: The Pearl of the Indian Ocean",
     img: "beach-sunset",
-    date: ["12", "Sep"],
-    dateLong: "12 September",
+    date: "2025-09-12",
     excerpt: "Golden beaches, lush tea plantations, ancient ruins and warm hospitality — why this little island leaves such a lasting impression.",
     prev: ["things-to-do", "Top Things to Do in Sri Lanka"],
     body: [

@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
+import ReactDOM from "react-dom";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Ic from "@/components/Ic";
+import JsonLd from "@/components/JsonLd";
 import { CtaBand } from "@/components/cards";
-import { BLOG, img, type Block } from "@/data/content";
+import { BLOG, dateLong, img, type Block } from "@/data/content";
+import { dims } from "@/data/image-dims";
+import { blogPostingSchema, breadcrumbSchema } from "@/lib/schema";
 
 export function generateStaticParams() {
   return BLOG.map((b) => ({ slug: b.slug }));
@@ -15,7 +19,13 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   return {
     title: b.title,
     description: b.excerpt,
-    openGraph: { images: [`/assets/img/lib/${b.img}.jpg`] },
+    alternates: { canonical: `/blog/${b.slug}/` },
+    openGraph: {
+      type: "article",
+      url: `/blog/${b.slug}/`,
+      publishedTime: b.date,
+      images: [`/assets/img/lib/${b.img}.jpg`],
+    },
   };
 }
 
@@ -42,17 +52,35 @@ export default function Post({ params }: { params: { slug: string } }) {
   const b = BLOG.find((x) => x.slug === params.slug);
   if (!b) notFound();
 
+  ReactDOM.preload(img(b.img), { as: "image", fetchPriority: "high" });
+
   return (
     <main id="main">
+      <JsonLd data={blogPostingSchema(b)} />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Blog", path: "/blog/" },
+          { name: b.title, path: `/blog/${b.slug}/` },
+        ])}
+      />
       <section className="subhero" style={{ minHeight: "56vh" }}>
         <div className="subhero__bg">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={img(b.img)} alt={b.title} />
+          <img
+            src={img(b.img)}
+            alt={b.title}
+            fetchPriority="high"
+            loading="eager"
+            decoding="async"
+            width={dims(b.img)[0]}
+            height={dims(b.img)[1]}
+          />
         </div>
         <div className="container subhero__inner">
           <div className="crumb"><Link href="/">Home</Link> &nbsp;/&nbsp; <Link href="/blog">Blog</Link></div>
           <h1 style={{ maxWidth: 820 }}>{b.title}</h1>
-          <span className="pill">{b.dateLong}</span>
+          <time className="pill" dateTime={b.date}>{dateLong(b.date)}</time>
         </div>
       </section>
 

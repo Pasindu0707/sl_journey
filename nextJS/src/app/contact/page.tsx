@@ -1,24 +1,45 @@
 import type { Metadata } from "next";
+import ReactDOM from "react-dom";
 import Link from "next/link";
 import Ic from "@/components/Ic";
 import EnquiryForm from "@/components/EnquiryForm";
+import JsonLd from "@/components/JsonLd";
 import { img } from "@/data/content";
+import { dims } from "@/data/image-dims";
+import { breadcrumbSchema } from "@/lib/schema";
 import { BRAND, PHONE, PHONE_RAW, EMAIL, ADDRESS, waLink } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "Contact Us",
   description:
     "Get in touch with SL Journey for customised Sri Lanka travel packages. Our experts are ready to plan your dream holiday.",
-  openGraph: { images: ["/assets/img/lib/harbor-dusk.jpg"] },
+  alternates: { canonical: "/contact/" },
+  openGraph: { url: "/contact/", images: ["/assets/img/lib/harbor-dusk.jpg"] },
 };
 
 export default function Contact() {
+  ReactDOM.preload(img("harbor-dusk"), { as: "image", fetchPriority: "high" });
+
   return (
     <main id="main">
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Contact", path: "/contact/" },
+        ])}
+      />
       <section className="subhero" style={{ minHeight: "48vh" }}>
         <div className="subhero__bg">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={img("harbor-dusk")} alt="Contact SL Journey" />
+          <img
+            src={img("harbor-dusk")}
+            alt={`Contact ${BRAND}`}
+            fetchPriority="high"
+            loading="eager"
+            decoding="async"
+            width={dims("harbor-dusk")[0]}
+            height={dims("harbor-dusk")[1]}
+          />
         </div>
         <div className="container subhero__inner">
           <div className="crumb"><Link href="/">Home</Link> &nbsp;/&nbsp; Contact</div>

@@ -1,24 +1,45 @@
 import type { Metadata } from "next";
+import ReactDOM from "react-dom";
 import Link from "next/link";
 import Ic from "@/components/Ic";
+import JsonLd from "@/components/JsonLd";
 import { FeatureCards, CtaBand } from "@/components/cards";
 import { img } from "@/data/content";
+import { dims } from "@/data/image-dims";
+import { breadcrumbSchema } from "@/lib/schema";
 import { BRAND } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "About Us",
   description:
     "Meet SL Journey — passionate Sri Lankan travel designers crafting personalised, seamless and safe journeys across the island.",
-  openGraph: { images: ["/assets/img/lib/safari-jeep.jpg"] },
+  alternates: { canonical: "/about/" },
+  openGraph: { url: "/about/", images: ["/assets/img/lib/safari-jeep.jpg"] },
 };
 
 export default function About() {
+  ReactDOM.preload(img("safari-jeep"), { as: "image", fetchPriority: "high" });
+
   return (
     <main id="main">
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "About Us", path: "/about/" },
+        ])}
+      />
       <section className="subhero">
         <div className="subhero__bg">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={img("safari-jeep")} alt="Safari jeep tour in Sri Lanka" />
+          <img
+            src={img("safari-jeep")}
+            alt="Safari jeep tour in Sri Lanka"
+            fetchPriority="high"
+            loading="eager"
+            decoding="async"
+            width={dims("safari-jeep")[0]}
+            height={dims("safari-jeep")[1]}
+          />
         </div>
         <div className="container subhero__inner">
           <div className="crumb"><Link href="/">Home</Link> &nbsp;/&nbsp; About Us</div>

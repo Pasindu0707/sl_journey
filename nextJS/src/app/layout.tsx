@@ -4,6 +4,8 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SiteEffects from "@/components/SiteEffects";
+import JsonLd from "@/components/JsonLd";
+import { travelAgencySchema } from "@/lib/schema";
 import { BRAND, TAGLINE, SITEURL } from "@/data/site";
 
 const inter = Inter({
@@ -28,10 +30,15 @@ export const metadata: Metadata = {
   },
   description:
     "SL Journey crafts tailor-made Sri Lanka tours — hill country, culture, wildlife, beaches and honeymoons. Expert local guides, 5-star rated, fully personalised.",
+  // Paths carry a trailing slash to match trailingSlash: true. Without it every
+  // canonical would point at a URL that redirects to the one actually served.
+  alternates: { canonical: "/" },
   openGraph: {
     title: `${BRAND} — ${TAGLINE}`,
     description: "Tailor-made Sri Lanka journeys, crafted with local soul.",
     type: "website",
+    url: "/",
+    siteName: BRAND,
     images: ["/assets/img/lib/sigiriya.jpg"],
   },
 };
@@ -48,6 +55,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <style>{`[data-reveal],[data-stagger]>*{opacity:1!important;transform:none!important}`}</style>
         </noscript>
         <a href="#main" className="skip-link">Skip to content</a>
+        {/* Sitewide so that the seller/publisher @id references emitted by the
+            Product and BlogPosting schemas resolve on the page carrying them. */}
+        <JsonLd data={travelAgencySchema()} />
         <Header />
         {children}
         <Footer />

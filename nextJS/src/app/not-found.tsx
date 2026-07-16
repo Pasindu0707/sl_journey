@@ -14,6 +14,7 @@ export default function NotFound() {
           <div style={{ marginTop: 30, display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
             <Link className="btn btn--primary btn--lg" href="/">Back to Home <Ic name="arrow" /></Link>
             <Link className="btn btn--ghost btn--lg" href="/#packages">View Tours</Link>
+            <Link className="btn btn--ghost btn--lg" href="/contact">Contact Us</Link>
           </div>
         </div>
       </section>

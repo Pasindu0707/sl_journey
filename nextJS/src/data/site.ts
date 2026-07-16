@@ -13,6 +13,18 @@ export const STREET = "No: 40A/1, Dummaladeniya North";
 export const LOCALITY = "Wennappuwa";
 export const COUNTRY = "LK";
 
+// Social + review profiles.
+//
+// TODO: fill these in. Leave any unknown URL as "" — the Footer skips empty ones
+// rather than rendering a dead icon, and SOCIALS below feeds schema.org sameAs,
+// where a wrong URL claims someone else's profile as ours. Never guess these.
+export const INSTAGRAM = "";
+export const FACEBOOK = "";
+export const TRIPADVISOR = "";
+
+/** Non-empty profile URLs, for JSON-LD sameAs. */
+export const SOCIALS = [INSTAGRAM, FACEBOOK, TRIPADVISOR].filter(Boolean);
+
 // Prefixes a root-relative path (e.g. "/assets/...") with the deploy base path.
 // Plain <img>/<a> tags are not auto-prefixed by Next's basePath — only next/link
 // and next/image are — so static asset URLs must go through this helper.

@@ -509,6 +509,9 @@ font[style]{background:transparent!important;box-shadow:none!important}
 .footer__contact svg{width:18px;height:18px;color:var(--gold-500);flex:none;margin-top:3px}
 .footer__contact a:hover{color:var(--gold-400)}
 .footer__bottom{border-top:1px solid rgba(255,255,255,.1);padding-block:24px;display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center;font-size:.85rem;color:#7e90b3}
+.footer__legal{display:flex;gap:18px;flex-wrap:wrap;justify-content:center}
+.footer__legal a{color:inherit;transition:color .3s var(--ease)}
+.footer__legal a:hover{color:var(--gold-500)}
 .footer__social{display:flex;gap:12px}
 .footer__social a{width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.15);display:grid;place-items:center;transition:.3s var(--ease);color:#aebbd6}
 .footer__social a:hover{background:var(--gold-500);color:var(--navy-900);border-color:var(--gold-500);transform:translateY(-3px)}

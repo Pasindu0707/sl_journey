@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { GALLERY, img } from "@/data/content";
+import { dims } from "@/data/image-dims";
 import Ic from "./Ic";
 
 export default function Gallery() {
@@ -29,13 +30,19 @@ export default function Gallery() {
   return (
     <>
       <div className="gallery-grid">
-        {GALLERY.map(([im, cap], i) => (
-          <button className="g-item" key={im + i} onClick={() => show(i)} aria-label={cap}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={img(im)} alt={cap} loading="lazy" decoding="async" />
-            <span className="g-cap">{cap}</span>
-          </button>
-        ))}
+        {GALLERY.map(([im, cap], i) => {
+          // The masonry sizes images to the column width with auto height, so
+          // these intrinsic dimensions are what let the browser reserve the row
+          // before the image decodes.
+          const [w, h] = dims(im);
+          return (
+            <button className="g-item" key={im + i} onClick={() => show(i)} aria-label={cap}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={img(im)} alt={cap} loading="lazy" decoding="async" width={w} height={h} />
+              <span className="g-cap">{cap}</span>
+            </button>
+          );
+        })}
       </div>
 
       <div className={"lightbox" + (open ? " open" : "")} onClick={(e) => {

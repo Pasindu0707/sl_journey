@@ -2,7 +2,7 @@ import Link from "next/link";
 import Ic from "./Ic";
 import { waLink } from "@/data/site";
 import {
-  img, FEATURES, EXPERIENCES, DESTINATIONS, REVIEWS, PACKAGES, BLOG, type Post,
+  img, dateParts, priceLabel, FEATURES, EXPERIENCES, DESTINATIONS, REVIEWS, PACKAGES, BLOG, type Post,
 } from "@/data/content";
 
 export const Stars = ({ n = 5 }: { n?: number }) => (
@@ -37,7 +37,7 @@ export function PackageCards() {
             <h3>{p.name}</h3>
             <p className="pkg__route">{p.route}</p>
             <div className="pkg__foot">
-              <div className="pkg__price">Starting<b>{p.price}</b></div>
+              <div className="pkg__price">Starting<b>{priceLabel(p)}</b></div>
               <span className="pkg__link">View Tour <Ic name="arrow" /></span>
             </div>
           </div>
@@ -106,12 +106,14 @@ export function ReviewCards() {
 export function BlogCards({ posts = BLOG }: { posts?: Post[] }) {
   return (
     <>
-      {posts.map((b) => (
+      {posts.map((b) => {
+        const [day, month] = dateParts(b.date);
+        return (
         <Link className="post-card" href={`/blog/${b.slug}`} data-reveal key={b.slug}>
           <div className="post-card__img">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={img(b.img)} alt={b.title} loading="lazy" decoding="async" />
-            <div className="post-card__date"><b>{b.date[0]}</b><span>{b.date[1]}</span></div>
+            <time className="post-card__date" dateTime={b.date}><b>{day}</b><span>{month}</span></time>
           </div>
           <div className="post-card__body">
             <h3>{b.title}</h3>
@@ -119,7 +121,8 @@ export function BlogCards({ posts = BLOG }: { posts?: Post[] }) {
             <span className="link-arrow">Read Story <Ic name="arrow" /></span>
           </div>
         </Link>
-      ))}
+        );
+      })}
     </>
   );
 }

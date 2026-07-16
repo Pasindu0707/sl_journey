@@ -1,5 +1,8 @@
 import Link from "next/link";
-import { BRAND, TAGLINE, ADDRESS, PHONE, PHONE_RAW, EMAIL, waLink, asset } from "@/data/site";
+import {
+  BRAND, TAGLINE, ADDRESS, PHONE, PHONE_RAW, EMAIL, FACEBOOK, INSTAGRAM,
+  TRIPADVISOR, waLink, asset,
+} from "@/data/site";
 import { PACKAGES } from "@/data/content";
 import Ic from "./Ic";
 
@@ -7,6 +10,15 @@ export default function Footer() {
   const quick: [string, string][] = [
     ["Home", "/"], ["About Us", "/about"], ["Tour Packages", "/#packages"],
     ["Blog", "/blog"], ["Gallery", "/gallery"], ["Contact Us", "/contact"],
+  ];
+
+  // Only profiles with a real URL are rendered. A dead href="#" icon costs trust
+  // and, once it reaches sameAs, tells search engines something untrue.
+  // TODO: set INSTAGRAM / FACEBOOK / TRIPADVISOR in site.ts to light these up.
+  const socials: [string, string, string][] = [
+    [INSTAGRAM, "Instagram", "instagram"],
+    [FACEBOOK, "Facebook", "facebook"],
+    [TRIPADVISOR, "Tripadvisor", "star"],
   ];
   return (
     <>
@@ -53,14 +65,23 @@ export default function Footer() {
               </ul>
               <div className="footer__social" style={{ marginTop: 18 }}>
                 <a href={waLink()} aria-label="WhatsApp" target="_blank" rel="noopener noreferrer"><Ic name="whatsapp" /></a>
-                <a href="#" aria-label="Instagram"><Ic name="instagram" /></a>
-                <a href="#" aria-label="Facebook"><Ic name="facebook" /></a>
+                {socials
+                  .filter(([url]) => url)
+                  .map(([url, label, icon]) => (
+                    <a key={label} href={url} aria-label={label} target="_blank" rel="noopener noreferrer">
+                      <Ic name={icon} />
+                    </a>
+                  ))}
               </div>
             </div>
           </div>
 
           <div className="footer__bottom">
             <span>&copy; {new Date().getFullYear()} {BRAND}. All rights reserved.</span>
+            <span className="footer__legal">
+              <Link href="/privacy">Privacy Policy</Link>
+              <Link href="/terms">Terms &amp; Conditions</Link>
+            </span>
             <span>{TAGLINE}</span>
           </div>
         </div>

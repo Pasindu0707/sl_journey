@@ -1,20 +1,34 @@
+import ReactDOM from "react-dom";
 import Link from "next/link";
 import Ic from "@/components/Ic";
 import {
   FeatureCards, PackageCards, ExperienceCards, DestinationCards, ReviewCards, BlogCards, CtaBand, Stars,
 } from "@/components/cards";
 import { img } from "@/data/content";
-import { BRAND, waLink } from "@/data/site";
+import { dims } from "@/data/image-dims";
+import { BRAND, TRIPADVISOR, waLink } from "@/data/site";
 
 const MARQUEE = ["Sigiriya", "Kandy", "Ella", "Yala Safari", "Galle Fort", "Mirissa", "Nuwara Eliya", "Anuradhapura"];
 
 export default function Home() {
+  // The hero is the LCP element. Preloading starts the fetch from the HTML,
+  // before the parser reaches the <img>.
+  ReactDOM.preload(img("sigiriya"), { as: "image", fetchPriority: "high" });
+
   return (
     <main id="main">
       <section className="hero">
         <div className="hero__bg">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={img("sigiriya")} alt="Sigiriya rock fortress at sunset, Sri Lanka" />
+          <img
+            src={img("sigiriya")}
+            alt="Sigiriya rock fortress at sunset, Sri Lanka"
+            fetchPriority="high"
+            loading="eager"
+            decoding="async"
+            width={dims("sigiriya")[0]}
+            height={dims("sigiriya")[1]}
+          />
         </div>
         <div className="container hero__inner">
           <span className="eyebrow" style={{ color: "var(--gold-400)" }}>Explore the Soul of Sri Lanka</span>
@@ -26,7 +40,22 @@ export default function Home() {
           </div>
           <div className="hero__trust">
             <span className="hero__stars"><Stars /></span>
-            <span>Rated <b style={{ color: "#fff" }}>Excellent</b> on Tripadvisor &middot; Tailor-made by local experts</span>
+            {/* Links out to the real profile rather than being marked up as
+                aggregateRating: self-serving review schema on your own
+                organisation is ignored by Google and risks a manual action.
+                TODO: set TRIPADVISOR in site.ts — until then this stays plain
+                text, because a guessed profile URL would point at a stranger. */}
+            <span>
+              Rated <b style={{ color: "#fff" }}>Excellent</b> on{" "}
+              {TRIPADVISOR ? (
+                <a href={TRIPADVISOR} target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "underline" }}>
+                  Tripadvisor
+                </a>
+              ) : (
+                "Tripadvisor"
+              )}{" "}
+              &middot; Tailor-made by local experts
+            </span>
           </div>
         </div>
         <div className="hero__scroll"><span>Scroll</span><span className="mouse" /></div>
