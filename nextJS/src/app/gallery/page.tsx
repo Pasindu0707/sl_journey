@@ -7,7 +7,7 @@ import { img } from "@/data/content";
 export const metadata: Metadata = {
   title: "Gallery — Travel Moments",
   description:
-    "A gallery of travel moments from across Sri Lanka — wildlife, heritage, hill country and golden coastlines, captured with SL Journeys.",
+    "A gallery of travel moments from across Sri Lanka — wildlife, heritage, hill country and golden coastlines, captured with SL Journey.",
   openGraph: { images: ["/assets/img/lib/sigiriya.jpg"] },
 };
 

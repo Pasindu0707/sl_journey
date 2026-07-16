@@ -8,7 +8,7 @@ import { BRAND } from "@/data/site";
 export const metadata: Metadata = {
   title: "About Us",
   description:
-    "Meet SL Journeys — passionate Sri Lankan travel designers crafting personalised, seamless and safe journeys across the island.",
+    "Meet SL Journey — passionate Sri Lankan travel designers crafting personalised, seamless and safe journeys across the island.",
   openGraph: { images: ["/assets/img/lib/safari-jeep.jpg"] },
 };
 

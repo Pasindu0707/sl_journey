@@ -1,8 +1,9 @@
 /** @type {import('next').NextConfig} */
 
-// GitHub Pages serves this project site from https://<user>.github.io/sl_journeys/
-// so in production every route and asset must be prefixed with the repo name.
-const basePath = process.env.NODE_ENV === "production" ? "/sl_journeys" : "";
+// The site is served from the root of the custom domain (sljourney.com), so the
+// base path is empty by default. Only set NEXT_PUBLIC_BASE_PATH if deploying
+// back to a project subpath such as <user>.github.io/sl_journeys.
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 const nextConfig = {
   reactStrictMode: true,
@@ -11,7 +12,6 @@ const nextConfig = {
   basePath,
   assetPrefix: basePath,
   trailingSlash: true, // emit /about/index.html so static hosts resolve cleanly
-  env: { NEXT_PUBLIC_BASE_PATH: basePath }, // exposed to <img>/href helpers
 };
 
 export default nextConfig;

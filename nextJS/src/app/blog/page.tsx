@@ -6,7 +6,7 @@ import { img } from "@/data/content";
 export const metadata: Metadata = {
   title: "Travel Blog",
   description:
-    "Travel stories and guides for Sri Lanka: best time to visit, local cuisine, top things to do and more from SL Journeys.",
+    "Travel stories and guides for Sri Lanka: best time to visit, local cuisine, top things to do and more from SL Journey.",
   openGraph: { images: ["/assets/img/lib/cuisine.jpg"] },
 };
 

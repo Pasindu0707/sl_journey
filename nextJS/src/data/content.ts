@@ -120,9 +120,9 @@ export const DESTINATIONS: [string, string][] = [
 
 export const REVIEWS: [string, string, string, string][] = [
   ["Anne R.", "Italy", "Very good experience — we highly recommend it",
-    "Mr. Sudam was a wonderful driver: thoughtful and attentive to everyone, especially the children. We highly recommend SL Journeys to anyone visiting Sri Lanka."],
+    "Mr. Sudam was a wonderful driver: thoughtful and attentive to everyone, especially the children. We highly recommend SL Journey to anyone visiting Sri Lanka."],
   ["Yasith P.", "Sri Lanka", "The beauty of the deep south",
-    "“Ayubowan!” I returned to my motherland after six years and it felt so good. I loved the beautiful environment and the seamless journey. Thank you so much, SL Journeys."],
+    "“Ayubowan!” I returned to my motherland after six years and it felt so good. I loved the beautiful environment and the seamless journey. Thank you so much, SL Journey."],
   ["Michelle", "France", "An unforgettable trip to Sri Lanka",
     "Many thanks to our fantastic guide, who with professionalism, kindness and deep knowledge of Sri Lanka made our trip unforgettable. We discovered wonderful places and lived authentic experiences, always feeling safe and well looked after. An impeccable, attentive and beautifully organised tour operator — highly recommended for anyone who wants to experience Sri Lanka in an authentic, stress-free way."],
 ];

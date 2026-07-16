@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     template: `%s — ${BRAND}`,
   },
   description:
-    "SL Journeys crafts tailor-made Sri Lanka tours — hill country, culture, wildlife, beaches and honeymoons. Expert local guides, 5-star rated, fully personalised.",
+    "SL Journey crafts tailor-made Sri Lanka tours — hill country, culture, wildlife, beaches and honeymoons. Expert local guides, 5-star rated, fully personalised.",
   openGraph: {
     title: `${BRAND} — ${TAGLINE}`,
     description: "Tailor-made Sri Lanka journeys, crafted with local soul.",

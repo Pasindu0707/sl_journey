@@ -65,7 +65,7 @@ export default function PackagePage({ params }: { params: { slug: string } }) {
               </div>
 
               <div style={{ marginTop: 38, display: "flex", gap: 14, flexWrap: "wrap" }}>
-                <a className="btn btn--primary" href={waLink(`Hi SL Journeys! I'm interested in the ${p.name} tour (${p.dur}).`)} target="_blank" rel="noopener noreferrer">
+                <a className="btn btn--primary" href={waLink(`Hi SL Journey! I'm interested in the ${p.name} tour (${p.dur}).`)} target="_blank" rel="noopener noreferrer">
                   <Ic name="whatsapp" /> Ask About This Tour
                 </a>
                 <Link className="btn btn--ghost" href="/#packages">View Other Tours</Link>

@@ -12,7 +12,7 @@ const TITLES: Record<string, string> = {
 };
 
 export default function EnquiryForm({
-  heading = "New enquiry from SL Journeys website",
+  heading = "New enquiry from SL Journey website",
   defaultPackage = "",
 }: {
   heading?: string;

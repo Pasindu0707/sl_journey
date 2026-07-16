@@ -8,7 +8,7 @@ import { BRAND, PHONE, PHONE_RAW, EMAIL, ADDRESS, waLink } from "@/data/site";
 export const metadata: Metadata = {
   title: "Contact Us",
   description:
-    "Get in touch with SL Journeys for customised Sri Lanka travel packages. Our experts are ready to plan your dream holiday.",
+    "Get in touch with SL Journey for customised Sri Lanka travel packages. Our experts are ready to plan your dream holiday.",
   openGraph: { images: ["/assets/img/lib/harbor-dusk.jpg"] },
 };
 
@@ -18,7 +18,7 @@ export default function Contact() {
       <section className="subhero" style={{ minHeight: "48vh" }}>
         <div className="subhero__bg">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={img("harbor-dusk")} alt="Contact SL Journeys" />
+          <img src={img("harbor-dusk")} alt="Contact SL Journey" />
         </div>
         <div className="container subhero__inner">
           <div className="crumb"><Link href="/">Home</Link> &nbsp;/&nbsp; Contact</div>
@@ -44,7 +44,7 @@ export default function Contact() {
               </div>
             </div>
             <div data-reveal="right">
-              <EnquiryForm heading="General enquiry from SL Journeys website" />
+              <EnquiryForm heading="General enquiry from SL Journey website" />
             </div>
           </div>
         </div>
