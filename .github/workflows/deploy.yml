@@ -36,6 +36,14 @@ jobs:
 
       - name: Build static export
         run: npm run build
+        env:
+          # A repository *variable*, not a secret: NEXT_PUBLIC_* values are
+          # inlined into the client bundle, so this is readable in the shipped
+          # JavaScript either way. Web3Forms keys are public by design and only
+          # permit delivery to the address they were registered to.
+          # Settings -> Secrets and variables -> Actions -> Variables.
+          # Unset, the build still succeeds; the form just loses email delivery.
+          NEXT_PUBLIC_WEB3FORMS_KEY: ${{ vars.NEXT_PUBLIC_WEB3FORMS_KEY }}
 
       - uses: actions/upload-pages-artifact@v3
         with:

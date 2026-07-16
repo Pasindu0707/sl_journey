@@ -1,107 +1,193 @@
-# SL Journeys — Website
+# SL Journey — Website
 
-A premium, fully self-contained marketing website for **SL Journeys** (Sri Lanka tour
-operator). Hand-built static HTML/CSS/JS — no build tools or framework needed.
+The marketing website for **SL Journey**, a Sri Lankan tour operator.
 *Explore the Soul of Sri Lanka.*
 
-## View it
+Live at **https://sljourney.com**.
 
-Just open **`index.html`** in any browser (double-click). Everything is local and
-relative, so it works from the file system or any static host.
+## Stack
 
-For the nicest experience (and so the WhatsApp/forms behave normally), run a tiny
-local server:
+- **Next.js 14** (App Router) + **TypeScript**, in `nextJS/`.
+- **Static export** (`output: "export"`) — the build emits plain HTML/CSS/JS into
+  `nextJS/out/`. There is no server, no database and no runtime backend.
+- Plain CSS design system in `src/app/globals.css`. No Tailwind, no UI library.
+- Fonts are self-hosted at build time by `next/font`, so pages make no request to
+  Google for fonts.
 
-```bash
-python -m http.server 5577
-# then open http://localhost:5577
-```
-
-## Pages (13)
-
-| Page | File |
-|------|------|
-| Home | `index.html` |
-| About | `about.html` |
-| Hill Country Adventures | `package-hill-country.html` |
-| Cultural Special | `package-cultural-special.html` |
-| Down South Explore | `package-down-south.html` |
-| Honeymoon Vibes | `package-honeymoon.html` |
-| Blog index | `blog.html` |
-| Best Time to Visit Sri Lanka | `post-best-time.html` |
-| Sri Lankan Cuisine | `post-cuisine.html` |
-| Top Things to Do | `post-things-to-do.html` |
-| Discover Sri Lanka | `post-discover.html` |
-| Gallery | `gallery.html` |
-| Contact | `contact.html` |
-
-## Structure
-
-```
-index.html, about.html, package-*.html, post-*.html, gallery.html, contact.html
-assets/
-  css/styles.css     ← design system (navy + amber, Playfair Display / Inter)
-  js/main.js         ← animations, mobile nav, lightbox, forms, counters
-  logo/              ← your logos + auto-generated transparent / white variants
-  img/lib/           ← 28 optimised photos used across the site
-  img/favicon-*.png
-_build/build.py      ← generator: re-creates all HTML from shared templates + content
-```
-
-### Editing content
-
-All copy, packages, attractions, reviews and blog posts live as data in
-**`_build/build.py`**. Edit there, then regenerate every page:
+## Run it
 
 ```bash
-python _build/build.py
+cd nextJS
+npm install      # first time only
+npm run dev      # development  -> http://localhost:3000
+npm run build    # static export -> nextJS/out/
+npm run lint
 ```
 
-(You can also edit the `.html` files directly if you prefer — they're plain HTML.)
+There is no `npm start`. A static export has no server to start — serve `out/`
+with any static file server if you want to check the built output.
 
-## Features
+## Folder map
 
-- Responsive, mobile-first (tested 390px → 1280px), no horizontal overflow
-- Elegant motion: hero Ken-Burns, scroll-reveal, staggered grids, count-up stats,
-  hover zooms, marquee — all GPU-friendly and **disabled under `prefers-reduced-motion`**
-- Sticky header (transparent over hero → solid on scroll), animated mobile drawer
-- Booking & contact forms compose a **pre-filled WhatsApp message** (and an email
-  fallback) — no backend needed
-- Gallery lightbox with keyboard nav
-- SEO: per-page titles/descriptions, Open Graph tags, canonical, favicons; semantic HTML
-- Accessibility: skip link, focus styles, alt text, aria labels, 44px+ touch targets
+```
+sl_journeys/
+├── .github/workflows/deploy.yml    push to main -> build -> GitHub Pages
+├── .gitattributes                  pins CNAME to LF
+├── README.md                       this file
+└── nextJS/
+    ├── next.config.mjs             static export, basePath, trailingSlash
+    ├── scripts/
+    │   └── gen-image-dims.mjs      regenerates src/data/image-dims.ts
+    ├── public/
+    │   ├── CNAME                   sljourney.com — do not delete
+    │   ├── .nojekyll
+    │   └── assets/
+    │       ├── img/lib/*.jpg       photo library
+    │       └── logo/*.png          logo variants
+    └── src/
+        ├── app/
+        │   ├── layout.tsx          root metadata, canonical, TravelAgency JSON-LD
+        │   ├── page.tsx            homepage
+        │   ├── globals.css         the whole design system
+        │   ├── sitemap.ts          generated from site.ts + content.ts
+        │   ├── robots.ts
+        │   ├── not-found.tsx       404
+        │   ├── about/ contact/ gallery/
+        │   ├── privacy/ terms/
+        │   ├── blog/               index + [slug]
+        │   └── packages/[slug]/
+        ├── components/             JSX only
+        │   ├── Header.tsx  Footer.tsx  EnquiryForm.tsx
+        │   ├── Gallery.tsx  LanguageSwitcher.tsx  SiteEffects.tsx
+        │   ├── Ic.tsx  cards.tsx  JsonLd.tsx
+        ├── data/
+        │   ├── site.ts             brand constants — single source of truth
+        │   ├── content.ts          PACKAGES, BLOG, GALLERY, REVIEWS, img()
+        │   ├── image-dims.ts       GENERATED — do not hand-edit
+        │   └── icons.ts  languages.ts
+        └── lib/                    pure functions, no JSX
+            └── schema.ts           JSON-LD builders
+```
 
-## Languages / translation
+`lib/` is for pure functions. `components/` is for JSX. Don't mix.
 
-A branded **language switcher** lives in the header (globe button → searchable
-dropdown of 100+ languages, with English, 日本語, 中文, Bahasa Indonesia, ไทย, Italiano,
-Deutsch and others featured first). It's powered by Google Translate behind a custom UI:
+## Editing content
 
-- The whole page translates in place; the choice is saved in a cookie and **persists
-  across every page**.
-- Our own brand name and the switcher labels are marked `notranslate` so they stay intact.
-- Language list and behaviour live in `assets/js/i18n.js`; styling in `styles.css`.
+Almost everything lives in two files:
 
-> **Important:** translation needs the site to be **served over http(s)** (the local
-> `python -m http.server`, or any web host) — it will *not* work if you open `index.html`
-> directly as a `file://` page, because the Google script and language cookie require a
-> real origin. Everything else still works from `file://`; only translation needs serving.
+- **`src/data/site.ts`** — brand name, phone, WhatsApp, email, address, site URL,
+  social links. If you find a phone number or email hardcoded anywhere else,
+  move it here. This is the pattern that makes a rebrand a one-line change.
+- **`src/data/content.ts`** — tour packages, blog posts, gallery captions,
+  reviews, homepage sections.
 
-Translations are machine-generated by Google (good, not professional). For perfectly
-worded copy later, the alternative is a paid service like Weglot/GTranslate.
+Prices are structured, not strings: set `priceUSD` (a number) and `priceUnit`
+(`"pp"` or `"couple"`). The displayed label (`From $640 pp`) and the `Offer`
+price in the structured data are both derived from those, so they cannot drift
+apart. Blog `date` is ISO (`YYYY-MM-DD`) and drives both the visible date and
+`datePublished`.
 
-## Before you launch — things to confirm
+### Adding a photo
 
-These are intentional placeholders / carried-over details:
+Drop the `.jpg` into `public/assets/img/lib/`, then:
 
-1. **Prices** (`From $640 pp`, etc.) are placeholders — set real rates in `_build/build.py`.
-2. **Email** is `info@ciaoceylontours.com` (your existing working address). Swap to an
-   `@sljourneys` address if/when you have one. Phone/WhatsApp: `+94 77 619 4579`.
-3. **Social links** (Instagram, Facebook in the footer) point to `#` — add real URLs.
-4. **Testimonials** were lightly adapted to the new brand name “SL Journeys” (the
-   originals referenced the old brand). Review the wording before publishing.
-5. **Down South Explore** duration: source was ambiguous (7N/8D vs 8N/7D); using
-   **7 Nights / 8 Days**.
-6. **Photos** are real Sri Lanka imagery sourced from your previous site's gallery plus
-   licensed Unsplash shots. Replace with your own photography anytime by dropping files
-   into `assets/img/lib/` (keep the same names) or editing the references.
+```bash
+cd nextJS && node scripts/gen-image-dims.mjs
+```
+
+That regenerates `src/data/image-dims.ts`. The gallery is a CSS-columns masonry,
+so images need their intrinsic dimensions or the grid reflows as each one loads.
+
+## Environment variables
+
+Both are optional. Copy `.env.example` to `.env.local` for local development.
+
+| Variable | What it does |
+|---|---|
+| `NEXT_PUBLIC_WEB3FORMS_KEY` | Access key from [web3forms.com](https://web3forms.com), registered to `info@sljourney.com`. Enables the enquiry form's email delivery. **Unset, the form still works over WhatsApp but loses its email safety net** — a blocked popup then means a lost lead. |
+| `NEXT_PUBLIC_BASE_PATH` | Leave unset for the custom domain. Only set it if deploying back to a project subpath, e.g. `NEXT_PUBLIC_BASE_PATH=/sl_journeys` for `<user>.github.io/sl_journeys`. |
+
+`NEXT_PUBLIC_*` values are inlined into the client bundle and are **public by
+design** — do not put anything genuinely secret in one. The Web3Forms key is
+meant to be exposed; it only permits delivery to the address it was registered
+to.
+
+To set the key for the live site: **repo Settings → Secrets and variables →
+Actions → Variables → New repository variable**, named
+`NEXT_PUBLIC_WEB3FORMS_KEY`. Then add it to the build step in
+`.github/workflows/deploy.yml`:
+
+```yaml
+      - name: Build static export
+        run: npm run build
+        env:
+          NEXT_PUBLIC_WEB3FORMS_KEY: ${{ vars.NEXT_PUBLIC_WEB3FORMS_KEY }}
+```
+
+A repository *variable* is the honest choice here rather than a *secret*, since
+the value ends up readable in the shipped JavaScript either way.
+
+## How the deploy works
+
+Push to `main` → GitHub Actions (`.github/workflows/deploy.yml`) → `npm ci` and
+`npm run build` inside `nextJS/` → uploads `nextJS/out` → GitHub Pages.
+
+Nothing outside `nextJS/` is deployed.
+
+### Custom domain
+
+Three things have to agree:
+
+1. **`nextJS/public/CNAME`** contains exactly `sljourney.com`. Everything in
+   `public/` is copied into `out/`, so this survives every rebuild. Deleting it
+   will drop the custom domain the next time Pages deploys, because
+   `upload-pages-artifact` replaces the whole site.
+2. **Repo Settings → Pages → Custom domain** is set to `sljourney.com`.
+3. **Repo Settings → Pages → Enforce HTTPS** is ticked.
+
+The CNAME file is pinned to LF in `.gitattributes` — GitHub Pages reads it
+byte-for-byte and a CRLF can invalidate the domain.
+
+## Hosting note: this repo is public
+
+GitHub Pages only serves from a **private** repo on a paid plan (Pro/Team/
+Enterprise). On the free plan the repo must be public, which is the current
+setup and is fine: this is a marketing site whose content is public anyway, and
+it contains no secrets.
+
+If you want the source private at no cost, **Cloudflare Pages** builds from a
+private GitHub repo on its free tier. It is the same static output, so no code
+changes are needed:
+
+- Build command `npm run build`, output directory `out`, root directory `nextJS`.
+- Move the `sljourney.com` DNS to Cloudflare and point the domain at the Pages
+  project.
+- Set `NEXT_PUBLIC_WEB3FORMS_KEY` in the project's environment variables.
+- The `CNAME` file is GitHub-specific and simply ignored there — harmless.
+
+That also buys response headers (HSTS, CSP, Referrer-Policy), which GitHub Pages
+cannot set at all. Netlify's free tier works the same way. Vercel's free tier is
+non-commercial only, so it is not appropriate for a tour business.
+
+## A note on the language switcher
+
+The globe menu is a **Google Translate widget**, not multilingual SEO. It
+translates client-side, which ranks for nothing on `google.it` / `google.fr` /
+`google.de`. Real internationalisation means translated routes plus `hreflang`
+tags, and is a separate project.
+
+## Security posture
+
+Static site, no server, no database, no auth, no stored user input — the attack
+surface is close to zero, and there is deliberately no CSP meta tag, rate
+limiting or input-sanitisation library here, because none of them would be doing
+anything.
+
+GitHub Pages cannot set HTTP response headers. That is a platform limitation,
+not a code problem; see the Cloudflare note above if it matters to you.
+
+`npm audit` reports vulnerabilities in `next`, `postcss` and the eslint
+toolchain. None are reachable in a static export: the `next` advisories concern
+the server runtime (middleware, image optimizer, cache), and this build has
+`output: "export"` with `images.unoptimized`, so no such server exists. The rest
+are dev-only. They are build-time and lint-time noise, not shipped code.
