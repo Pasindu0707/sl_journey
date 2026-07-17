@@ -7,6 +7,17 @@ export const EMAIL = "hello@sljourney.com";
 export const ADDRESS = "No: 40A/1, Dummaladeniya North, Wennappuwa, Sri Lanka";
 export const SITEURL = "https://sljourney.com";
 
+// Web3Forms access key — the enquiry form posts here and Web3Forms emails the
+// submission to the address the key is registered to (set that to
+// hello@sljourney.com in the Web3Forms dashboard).
+//
+// This is PUBLIC by design: it ships inside the client bundle and is readable in
+// the deployed site's source either way, so committing it exposes nothing new.
+// It only permits delivery to your registered inbox. Override per-environment
+// with NEXT_PUBLIC_WEB3FORMS_KEY (|| so an empty CI value falls back to this).
+export const WEB3FORMS_KEY =
+  process.env.NEXT_PUBLIC_WEB3FORMS_KEY || "83a2b43d-c73e-4355-b716-b1d6cb7a4d5f";
+
 // Structured-data address parts. Kept split so schema.ts can emit a PostalAddress
 // without re-parsing ADDRESS.
 export const STREET = "No: 40A/1, Dummaladeniya North";

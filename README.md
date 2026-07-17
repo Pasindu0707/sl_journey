@@ -104,7 +104,7 @@ Both are optional. Copy `.env.example` to `.env.local` for local development.
 
 | Variable | What it does |
 |---|---|
-| `NEXT_PUBLIC_WEB3FORMS_KEY` | Access key from [web3forms.com](https://web3forms.com), **registered to `hello@sljourney.com`** — Web3Forms' free tier delivers to whichever address the key was created with, so that is what decides where enquiries land. Enables the enquiry form's email delivery. **Unset, the form still works over WhatsApp but loses its email safety net** — a blocked popup then means a lost lead. |
+| `NEXT_PUBLIC_WEB3FORMS_KEY` | **Optional override.** A working [web3forms.com](https://web3forms.com) key is already committed as the default in `src/data/site.ts` — it is public by design (it ships in the client bundle regardless), so committing it exposes nothing new. Set this only to point a different environment at a different key. Where enquiries land is decided in the Web3Forms dashboard: register/set the key's recipient to `hello@sljourney.com`. |
 | `NEXT_PUBLIC_BASE_PATH` | Leave unset for the custom domain. Only set it if deploying back to a project subpath, e.g. `NEXT_PUBLIC_BASE_PATH=/sl_journeys` for `<user>.github.io/sl_journeys`. |
 
 `NEXT_PUBLIC_*` values are inlined into the client bundle and are **public by
