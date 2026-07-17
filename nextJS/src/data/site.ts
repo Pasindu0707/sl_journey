@@ -24,6 +24,12 @@ export const STREET = "No: 40A/1, Dummaladeniya North";
 export const LOCALITY = "Wennappuwa";
 export const COUNTRY = "LK";
 
+// Google Search Console verification. In Search Console, add a "URL prefix"
+// property for https://sljourney.com, pick the "HTML tag" method, and paste ONLY
+// the content value here (the part in content="..."). Empty = no tag is emitted.
+// Next's metadata API renders it as <meta name="google-site-verification" ...>.
+export const GOOGLE_SITE_VERIFICATION = "";
+
 // Social + review profiles.
 //
 // TODO: fill these in. Leave any unknown URL as "" — the Footer skips empty ones

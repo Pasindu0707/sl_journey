@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 import SiteEffects from "@/components/SiteEffects";
 import JsonLd from "@/components/JsonLd";
 import { travelAgencySchema } from "@/lib/schema";
-import { BRAND, TAGLINE, SITEURL } from "@/data/site";
+import { BRAND, TAGLINE, SITEURL, GOOGLE_SITE_VERIFICATION } from "@/data/site";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -33,6 +33,10 @@ export const metadata: Metadata = {
   // Paths carry a trailing slash to match trailingSlash: true. Without it every
   // canonical would point at a URL that redirects to the one actually served.
   alternates: { canonical: "/" },
+  // Only rendered when a value is set, so an empty string emits no tag.
+  ...(GOOGLE_SITE_VERIFICATION
+    ? { verification: { google: GOOGLE_SITE_VERIFICATION } }
+    : {}),
   openGraph: {
     title: `${BRAND} — ${TAGLINE}`,
     description: "Tailor-made Sri Lanka journeys, crafted with local soul.",
