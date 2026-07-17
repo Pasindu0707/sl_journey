@@ -16,7 +16,7 @@ Thumbs.db
 .env*
 !.env.example
 
-# Logo design sources — the exported variants in nextJS/public/assets/logo/ are
-# what the site ships; these originals stay out of the repo.
-SL Journeys (*)/
-SL Journeys (*).zip
+# Local design sources / working materials — logo originals, their zips, and the
+# old content-capture doc. The site ships the exported logo variants in
+# nextJS/public/assets/logo/, so these raw originals stay out of the repo.
+design-sources/
