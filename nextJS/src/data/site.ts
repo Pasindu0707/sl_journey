@@ -3,7 +3,7 @@ export const TAGLINE = "Explore the Soul of Sri Lanka";
 export const PHONE = "+94 77 619 4579";
 export const PHONE_RAW = "+94776194579";
 export const WA = "94776194579";
-export const EMAIL = "info@sljourney.com";
+export const EMAIL = "hello@sljourney.com";
 export const ADDRESS = "No: 40A/1, Dummaladeniya North, Wennappuwa, Sri Lanka";
 export const SITEURL = "https://sljourney.com";
 
