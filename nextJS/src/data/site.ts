@@ -43,6 +43,16 @@ export const CONTENT_UPDATED = "2026-07-21";
 // Next's metadata API renders it as <meta name="google-site-verification" ...>.
 export const GOOGLE_SITE_VERIFICATION = "";
 
+// Facebook App ID, for the fb:app_id meta tag.
+//
+// The Sharing Debugger reports this as a "warning that should be fixed", but it
+// is NOT required for link previews — those already work. It only ties shares
+// back to a Facebook App so you can see them in Domain Insights. It cannot be
+// invented: the value must be a real app you own, created at
+// developers.facebook.com/apps (Business type, no products need enabling), then
+// pasted here. Empty = no tag is emitted, which is the honest default.
+export const FB_APP_ID = "";
+
 // Social + review profiles.
 //
 // Leave any unknown URL as "" — the Footer skips empty ones rather than

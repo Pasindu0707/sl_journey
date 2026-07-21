@@ -52,8 +52,11 @@ export default function Header() {
         <div className="container header__inner">
           <Link className="header__logo" href="/" aria-label={`${BRAND} — home`}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img className="logo-light" src={asset("/assets/logo/logo-horizontal-white.png")} alt={BRAND} />
-            <img className="logo-dark" src={asset("/assets/logo/logo-horizontal-trans.png")} alt={BRAND} />
+            {/* Intrinsic size of the asset (503x138). CSS sizes it to 46px tall;
+                these are here so the browser reserves the right box before the
+                image lands, rather than shifting the header on load. */}
+            <img className="logo-light" src={asset("/assets/logo/logo-horizontal-white.png")} alt={BRAND} width={503} height={138} />
+            <img className="logo-dark" src={asset("/assets/logo/logo-horizontal-trans.png")} alt={BRAND} width={503} height={138} />
           </Link>
 
           <ul className="header__nav">

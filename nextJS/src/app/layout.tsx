@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 import SiteEffects from "@/components/SiteEffects";
 import JsonLd from "@/components/JsonLd";
 import { travelAgencySchema } from "@/lib/schema";
-import { BRAND, TAGLINE, SITEURL, GOOGLE_SITE_VERIFICATION } from "@/data/site";
+import { BRAND, TAGLINE, SITEURL, GOOGLE_SITE_VERIFICATION, FB_APP_ID } from "@/data/site";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     template: `%s - ${BRAND}`,
   },
   description:
-    "SL Journey crafts tailor-made Sri Lanka tours — hill country, culture, wildlife, beaches and honeymoons. Expert local guides, 5-star rated, fully personalised.",
+    "SL Journey crafts tailor-made Sri Lanka tours - hill country, culture, wildlife, beaches and honeymoons. Expert local guides, 5-star rated, fully personalised.",
   // Paths carry a trailing slash to match trailingSlash: true. Without it every
   // canonical would point at a URL that redirects to the one actually served.
   alternates: { canonical: "/" },
@@ -37,13 +37,26 @@ export const metadata: Metadata = {
   ...(GOOGLE_SITE_VERIFICATION
     ? { verification: { google: GOOGLE_SITE_VERIFICATION } }
     : {}),
+  // fb:app_id only when a real one is set — see the note in site.ts.
+  ...(FB_APP_ID ? { other: { "fb:app_id": FB_APP_ID } } : {}),
   openGraph: {
     title: `${BRAND} - ${TAGLINE}`,
     description: "Tailor-made Sri Lanka journeys, crafted with local soul.",
     type: "website",
     url: "/",
     siteName: BRAND,
-    images: ["/assets/img/lib/sigiriya.jpg"],
+    locale: "en_GB",
+    // Stating the intrinsic size lets Facebook and WhatsApp lay out the large
+    // card on first share, instead of rendering a small or empty preview while
+    // they go and fetch the image to find out how big it is.
+    images: [
+      {
+        url: "/assets/img/lib/sigiriya.jpg",
+        width: 1024,
+        height: 683,
+        alt: "Sigiriya rock fortress at sunset, Sri Lanka",
+      },
+    ],
   },
 };
 
