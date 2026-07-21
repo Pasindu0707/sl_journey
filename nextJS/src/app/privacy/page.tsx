@@ -56,11 +56,11 @@ export default function Privacy() {
               these fields:
             </p>
             <ul className="dash">
-              <li><b>Your name and email address</b> — required, so we can reply to you.</li>
-              <li><b>Phone / WhatsApp number and nationality</b> — optional; the phone number lets us reply on WhatsApp, and nationality helps us advise on visas and pricing.</li>
-              <li><b>Arrival and departure dates, number of adults and children</b> — optional; used to check availability and quote.</li>
-              <li><b>Accommodation type, meal basis and tour package</b> — optional; your preferences.</li>
-              <li><b>Your message</b> — whatever you choose to tell us.</li>
+              <li><b>Your name and email address</b> - required, so we can reply to you.</li>
+              <li><b>Phone / WhatsApp number and nationality</b> - optional; the phone number lets us reply on WhatsApp, and nationality helps us advise on visas and pricing.</li>
+              <li><b>Arrival and departure dates, number of adults and children</b> - optional; used to check availability and quote.</li>
+              <li><b>Accommodation type, meal basis and tour package</b> - optional; your preferences.</li>
+              <li><b>Your message</b> - whatever you choose to tell us.</li>
             </ul>
             <p>
               There is no account to create, no newsletter sign-up, and no payment
@@ -74,13 +74,13 @@ export default function Privacy() {
               lead is never silently lost:
             </p>
             <ul className="dash">
-              <li><b>By email</b> — delivered to <a href={`mailto:${EMAIL}`}>{EMAIL}</a> through Web3Forms, a form-delivery service that passes the message on to our inbox.</li>
-              <li><b>By WhatsApp</b> — your browser opens WhatsApp with the same details pre-filled. Nothing is sent until you press send in WhatsApp, and that message is then handled by WhatsApp under their own privacy terms.</li>
+              <li><b>By email</b> - delivered to <a href={`mailto:${EMAIL}`}>{EMAIL}</a> through Web3Forms, a form-delivery service that passes the message on to our inbox.</li>
+              <li><b>By WhatsApp</b> - your browser opens WhatsApp with the same details pre-filled. Nothing is sent until you press send in WhatsApp, and that message is then handled by WhatsApp under their own privacy terms.</li>
             </ul>
             <p>
               From there your enquiry lives in our email inbox and, if you message us,
               our WhatsApp. It is read by the people who plan your trip. If you book,
-              we pass on only what a supplier needs — for example your name and dates
+              we pass on only what a supplier needs - for example your name and dates
               to a hotel, or your name to a driver or guide.
             </p>
 
@@ -97,9 +97,9 @@ export default function Privacy() {
               Analytics, no advertising pixel, and no tracking of your visit.
             </p>
             <ul className="dash">
-              <li><b>Language switcher</b> — if you pick a language other than English, the Google Translate widget stores a <code>googtrans</code> cookie in your browser to remember that choice, and loads Google&apos;s translation script. If you never change the language, it is not set.</li>
-              <li><b>Fonts</b> — served from this site, not from Google&apos;s servers, so viewing a page makes no request to Google for fonts.</li>
-              <li><b>Hosting</b> — the site is served by GitHub Pages, which like any web host processes your IP address in its server logs to deliver the page.</li>
+              <li><b>Language switcher</b> - if you pick a language other than English, the Google Translate widget stores a <code>googtrans</code> cookie in your browser to remember that choice, and loads Google&apos;s translation script. If you never change the language, it is not set.</li>
+              <li><b>Fonts</b> - served from this site, not from Google&apos;s servers, so viewing a page makes no request to Google for fonts.</li>
+              <li><b>Hosting</b> - the site is served by GitHub Pages, which like any web host processes your IP address in its server logs to deliver the page.</li>
             </ul>
 
             <h2>How long we keep it</h2>
@@ -121,7 +121,7 @@ export default function Privacy() {
             <p>
               If you are in the UK or EU, the GDPR gives you these rights and also the
               right to complain to your national data protection authority. Our legal
-              basis for handling your enquiry is your request for a quote — that is,
+              basis for handling your enquiry is your request for a quote - that is,
               taking steps at your request before entering into a contract.
             </p>
 

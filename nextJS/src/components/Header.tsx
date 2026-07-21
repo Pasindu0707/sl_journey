@@ -50,7 +50,7 @@ export default function Header() {
     <>
       <header className={"header" + (solid ? " is-solid" : "")}>
         <div className="container header__inner">
-          <Link className="header__logo" href="/" aria-label={`${BRAND} — home`}>
+          <Link className="header__logo" href="/" aria-label={`${BRAND} - home`}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             {/* Intrinsic size of the asset (503x138). CSS sizes it to 46px tall;
                 these are here so the browser reserves the right box before the

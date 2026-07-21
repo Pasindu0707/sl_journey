@@ -19,11 +19,11 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   const p = PACKAGES.find((x) => x.slug === params.slug);
   if (!p) return {};
   return {
-    title: `${p.name} — ${p.dur}`,
+    title: `${p.name} - ${p.dur}`,
     description: packageDescription(p),
     alternates: { canonical: `/packages/${p.slug}/` },
     openGraph: {
-      title: `${p.name} — ${p.dur}`,
+      title: `${p.name} - ${p.dur}`,
       description: packageDescription(p),
       url: `/packages/${p.slug}/`,
       images: [`/assets/img/lib/${p.hero}.jpg`],
@@ -103,7 +103,7 @@ export default function PackagePage({ params }: { params: { slug: string } }) {
             <aside className="book-aside" data-reveal="right">
               <div style={{ marginBottom: 14 }}><span className="eyebrow">Book Your Tour</span></div>
               <EnquiryForm
-                heading={`Booking enquiry — ${p.name} (${p.dur})`}
+                heading={`Booking enquiry - ${p.name} (${p.dur})`}
                 defaultPackage={p.name}
               />
             </aside>

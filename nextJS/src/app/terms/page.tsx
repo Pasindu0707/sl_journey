@@ -60,7 +60,7 @@ export default function Terms() {
             <p>
               Prices shown on this site are <b>starting from</b> figures in US
               dollars, given per person on a shared basis unless the package says
-              otherwise — Honeymoon Vibes is priced per couple. They indicate what a
+              otherwise - Honeymoon Vibes is priced per couple. They indicate what a
               trip typically starts at; they are not an offer and are not guaranteed.
             </p>
             <p>
@@ -97,7 +97,7 @@ export default function Terms() {
               terms of the hotels and suppliers held for you.
             </p>
             <p>
-              We may occasionally need to alter an itinerary — weather, road
+              We may occasionally need to alter an itinerary - weather, road
               conditions, wildlife park closures, safety, or a supplier failing. Where
               that happens we will offer the nearest equivalent we can arrange. We do
               not promise to see a specific wild animal, and a leopard sighting is
@@ -124,7 +124,7 @@ export default function Terms() {
             <p>
               We arrange your trip with care and use suppliers we trust. We are
               responsible for arranging the services described in your confirmation.
-              We are not responsible for events outside our reasonable control —
+              We are not responsible for events outside our reasonable control -
               weather, natural events, strikes, civil unrest, epidemics, flight delays
               or cancellations, or your own acts.
             </p>

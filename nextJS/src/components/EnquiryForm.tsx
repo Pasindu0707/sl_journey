@@ -105,8 +105,8 @@ export default function EnquiryForm({
           <label>Accommodation Type</label>
           <select name="accommodation" defaultValue="">
             <option value="">Select…</option>
-            <option>Standard (2–3 Stars)</option>
-            <option>Deluxe (3–4 Stars)</option>
+            <option>Standard (2-3 Stars)</option>
+            <option>Deluxe (3-4 Stars)</option>
             <option>High End (4 Stars)</option>
             <option>Luxury (5 Stars)</option>
             <option>Ultra Luxury</option>
@@ -165,7 +165,7 @@ export default function EnquiryForm({
       <div className="form-status" aria-live="polite">
         {state.kind === "sent" && (
           <div className="form-msg show ok">
-            Thank you — your enquiry is on its way to our team. We&apos;ll be in touch
+            Thank you - your enquiry is on its way to our team. We&apos;ll be in touch
             by email very soon.
           </div>
         )}
