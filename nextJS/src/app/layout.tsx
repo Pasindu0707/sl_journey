@@ -25,11 +25,14 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   metadataBase: new URL(SITEURL),
   title: {
-    default: `${BRAND} - ${TAGLINE}`,
+    // Homepage title leads with the service, not the tagline: "private tour
+    // guide" and "custom Sri Lanka trips" are what people actually search for.
+    // The tagline lives on in the OG title and the schema slogan.
+    default: `${BRAND} | Private Tour Guide & Custom Sri Lanka Trips`,
     template: `%s - ${BRAND}`,
   },
   description:
-    "SL Journey crafts tailor-made Sri Lanka tours - hill country, culture, wildlife, beaches and honeymoons. Expert local guides, 5-star rated, fully personalised.",
+    "Private, custom Sri Lanka tours designed around you - hill country, culture, wildlife, beaches and honeymoons. Expert local guides and private drivers, fully tailor-made.",
   // Paths carry a trailing slash to match trailingSlash: true. Without it every
   // canonical would point at a URL that redirects to the one actually served.
   alternates: { canonical: "/" },
@@ -41,7 +44,8 @@ export const metadata: Metadata = {
   ...(FB_APP_ID ? { other: { "fb:app_id": FB_APP_ID } } : {}),
   openGraph: {
     title: `${BRAND} - ${TAGLINE}`,
-    description: "Tailor-made Sri Lanka journeys, crafted with local soul.",
+    description:
+      "Private, custom Sri Lanka tours with expert local guides. Hill country, culture, wildlife, beaches and honeymoons, tailor-made around you.",
     type: "website",
     url: "/",
     siteName: BRAND,

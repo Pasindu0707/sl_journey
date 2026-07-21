@@ -28,7 +28,10 @@ export default function Footer() {
             <div className="footer__brand">
               <div className="wm notranslate" translate="no">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={asset("/assets/logo/logo-mark-white.png")} alt="" width={132} height={137} /> {BRAND}
+                {/* alt="" on purpose: the brand name follows as real text, so
+                    describing this would make screen readers say it twice.
+                    Always below the fold, so it is safe to lazy-load. */}
+                <img src={asset("/assets/logo/logo-mark-white.png")} alt="" width={132} height={137} loading="lazy" /> {BRAND}
               </div>
               <p>
                 We craft unforgettable, tailor-made journeys across Sri Lanka - blending

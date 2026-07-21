@@ -52,7 +52,7 @@ export default function PackagePage({ params }: { params: { slug: string } }) {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={img(p.hero)}
-            alt={p.name}
+            alt={`${p.name} - ${p.dur} private Sri Lanka tour with SL Journey`}
             fetchPriority="high"
             loading="eager"
             decoding="async"

@@ -30,7 +30,7 @@ export function PackageCards() {
         <Link className="pkg" href={`/packages/${p.slug}`} data-reveal="scale" key={p.slug}>
           <div className="pkg__img">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={img(p.img)} alt={p.name} loading="lazy" decoding="async" />
+            <img src={img(p.img)} alt={`${p.name} - ${p.dur} private tour of Sri Lanka`} loading="lazy" decoding="async" />
           </div>
           <div className="pkg__body">
             <span className="pkg__dur">{p.days}</span>
@@ -54,7 +54,7 @@ export function ExperienceCards({ limit }: { limit?: number } = {}) {
       {EXPERIENCES.slice(0, limit ?? EXPERIENCES.length).map(([im, tag, t, d]) => (
         <article className="exp" tabIndex={0} key={t}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={img(im)} alt={t} loading="lazy" decoding="async" />
+          <img src={img(im)} alt={`${t} - ${tag.toLowerCase()} experience on a Sri Lanka tour`} loading="lazy" decoding="async" />
           <div className="exp__body">
             <span className="tag">{tag}</span>
             <h3>{t}</h3>
@@ -72,7 +72,7 @@ export function DestinationCards({ limit }: { limit?: number } = {}) {
       {DESTINATIONS.slice(0, limit ?? DESTINATIONS.length).map(([im, name]) => (
         <Link className="dest" href="/gallery" aria-label={name} key={name}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={img(im)} alt={name} loading="lazy" decoding="async" />
+          <img src={img(im)} alt={`${name}, Sri Lanka`} loading="lazy" decoding="async" />
           <div className="dest__cap">
             <h3>{name}</h3>
             <span className="arr"><Ic name="arrow" /></span>

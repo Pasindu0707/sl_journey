@@ -38,7 +38,9 @@ export default function Gallery() {
           return (
             <button className="g-item" key={im + i} onClick={() => show(i)} aria-label={cap}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={img(im)} alt={cap} loading="lazy" decoding="async" width={w} height={h} />
+              {/* Captions alone read as vague out of context ("Above the
+                  Clouds"), so the alt anchors each shot to the destination. */}
+              <img src={img(im)} alt={`${cap} - Sri Lanka tour photo by SL Journey`} loading="lazy" decoding="async" width={w} height={h} />
               <span className="g-cap">{cap}</span>
             </button>
           );
@@ -54,7 +56,7 @@ export default function Gallery() {
         <button className="lb-close" aria-label="Close"><Ic name="x" /></button>
         <button className="lb-nav prev" aria-label="Previous"><Ic name="chevL" /></button>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        {open && <img src={img(GALLERY[idx][0])} alt={GALLERY[idx][1]} />}
+        {open && <img src={img(GALLERY[idx][0])} alt={`${GALLERY[idx][1]} - Sri Lanka tour photo by SL Journey`} />}
         <button className="lb-nav next" aria-label="Next"><Ic name="chevR" /></button>
       </div>
     </>

@@ -23,7 +23,7 @@ import {
   STREET,
   TAGLINE,
 } from "@/data/site";
-import { priceBasis, type Package, type Post } from "@/data/content";
+import { PACKAGES, priceBasis, type Package, type Post } from "@/data/content";
 
 /** Absolute URL for a root-relative path. Schema requires absolute URLs. */
 const abs = (path: string) => new URL(path, SITEURL).toString();
@@ -45,10 +45,30 @@ export function travelAgencySchema() {
     url: abs("/"),
     logo: abs("/assets/logo/logo-full-trans.png"),
     image: abs("/assets/img/lib/sigiriya.jpg"),
+    slogan: TAGLINE,
     telephone: PHONE_RAW,
     email: EMAIL,
     address: postalAddress,
-    areaServed: "Sri Lanka",
+    areaServed: { "@type": "Country", name: "Sri Lanka" },
+    // The private tours we actually sell, derived from PACKAGES so the catalogue
+    // can never drift from the pages. Each entry points at the same TouristTrip
+    // the package page emits, via its url.
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Private Sri Lanka tour packages",
+      itemListElement: PACKAGES.map((p) => ({
+        "@type": "Offer",
+        name: `${p.name} - ${p.dur} private tour`,
+        price: p.priceUSD,
+        priceCurrency: "USD",
+        url: abs(`/packages/${p.slug}/`),
+        itemOffered: {
+          "@type": "TouristTrip",
+          name: p.name,
+          url: abs(`/packages/${p.slug}/`),
+        },
+      })),
+    },
     // Omitted entirely when empty: an empty sameAs array is noise, and a guessed
     // URL would claim someone else's profile as ours.
     ...(SOCIALS.length ? { sameAs: SOCIALS } : {}),
