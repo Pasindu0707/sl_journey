@@ -25,8 +25,8 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   metadataBase: new URL(SITEURL),
   title: {
-    default: `${BRAND} — ${TAGLINE}`,
-    template: `%s — ${BRAND}`,
+    default: `${BRAND} - ${TAGLINE}`,
+    template: `%s - ${BRAND}`,
   },
   description:
     "SL Journey crafts tailor-made Sri Lanka tours — hill country, culture, wildlife, beaches and honeymoons. Expert local guides, 5-star rated, fully personalised.",
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     ? { verification: { google: GOOGLE_SITE_VERIFICATION } }
     : {}),
   openGraph: {
-    title: `${BRAND} — ${TAGLINE}`,
+    title: `${BRAND} - ${TAGLINE}`,
     description: "Tailor-made Sri Lanka journeys, crafted with local soul.",
     type: "website",
     url: "/",

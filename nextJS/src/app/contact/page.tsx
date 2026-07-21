@@ -53,7 +53,7 @@ export default function Contact() {
             <div data-reveal="left">
               <span className="eyebrow">Get in Touch</span>
               <h2 style={{ marginTop: 16 }}>We&apos;d love to hear from you</h2>
-              <p className="lead" style={{ marginTop: 16 }}>Get in touch with {BRAND} for customised Sri Lanka travel packages. Our experts are ready to help you plan your dream holiday — contact us today for a truly personalised experience.</p>
+              <p className="lead" style={{ marginTop: 16 }}>Get in touch with {BRAND} for customised Sri Lanka travel packages. Our experts are ready to help you plan your dream holiday - contact us today for a truly personalised experience.</p>
               <div className="contact-list">
                 <div className="contact-item"><span className="ic"><Ic name="phone" /></span><div><div className="lbl">Phone</div><a href={`tel:${PHONE_RAW}`}>{PHONE}</a></div></div>
                 <div className="contact-item"><span className="ic"><Ic name="whatsapp" /></span><div><div className="lbl">WhatsApp</div><a href={waLink()} target="_blank" rel="noopener noreferrer">{PHONE}</a></div></div>

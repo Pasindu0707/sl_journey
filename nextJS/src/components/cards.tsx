@@ -47,10 +47,11 @@ export function PackageCards() {
   );
 }
 
-export function ExperienceCards() {
+/** `limit` trims the grid for the homepage; the full set still renders elsewhere. */
+export function ExperienceCards({ limit }: { limit?: number } = {}) {
   return (
     <>
-      {EXPERIENCES.map(([im, tag, t, d]) => (
+      {EXPERIENCES.slice(0, limit ?? EXPERIENCES.length).map(([im, tag, t, d]) => (
         <article className="exp" tabIndex={0} key={t}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={img(im)} alt={t} loading="lazy" decoding="async" />
@@ -65,10 +66,10 @@ export function ExperienceCards() {
   );
 }
 
-export function DestinationCards() {
+export function DestinationCards({ limit }: { limit?: number } = {}) {
   return (
     <>
-      {DESTINATIONS.map(([im, name]) => (
+      {DESTINATIONS.slice(0, limit ?? DESTINATIONS.length).map(([im, name]) => (
         <Link className="dest" href="/gallery" aria-label={name} key={name}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={img(im)} alt={name} loading="lazy" decoding="async" />
@@ -137,7 +138,7 @@ export function CtaBand() {
           <div className="cta-band__inner">
             <span className="eyebrow center">Your Journey Awaits</span>
             <h2 style={{ marginTop: 16 }}>Let&apos;s Plan Your Sri Lanka Story</h2>
-            <p>Tell us how you like to travel and our local experts will craft a private, tailor-made itinerary — at no obligation.</p>
+            <p>Tell us how you like to travel and our local experts will craft a private, tailor-made itinerary - at no obligation.</p>
             <div className="hero__cta">
               <a className="btn btn--primary btn--lg" href={waLink()} target="_blank" rel="noopener noreferrer"><Ic name="whatsapp" /> Chat on WhatsApp</a>
               <Link className="btn btn--light btn--lg" href="/contact">Enquire Now</Link>

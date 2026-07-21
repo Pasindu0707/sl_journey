@@ -12,7 +12,7 @@ import { BRAND } from "@/data/site";
 export const metadata: Metadata = {
   title: "About Us",
   description:
-    "Meet SL Journey — passionate Sri Lankan travel designers crafting personalised, seamless and safe journeys across the island.",
+    "Meet SL Journey - passionate Sri Lankan travel designers crafting personalised, seamless and safe journeys across the island.",
   alternates: { canonical: "/about/" },
   openGraph: { url: "/about/", images: ["/assets/img/lib/safari-jeep.jpg"] },
 };
@@ -63,7 +63,7 @@ export default function About() {
               <span className="eyebrow">Who We Are</span>
               <h2 style={{ marginTop: 18 }}>Sri Lanka&apos;s leading travel designers</h2>
               <p className="lead" style={{ marginTop: 18 }}>At {BRAND}, we create unforgettable travel experiences across the breathtaking island of Sri Lanka. With our local expertise and passion for hospitality, we design personalised tour packages that bring you closer to the island&apos;s rich culture, stunning landscapes and hidden treasures.</p>
-              <p style={{ marginTop: 16 }}>Whether you&apos;re looking for adventure, relaxation or cultural discovery, we ensure your journey is seamless, safe and truly memorable. From the first message to your final farewell at the airport, you travel with people who know — and love — every corner of this island.</p>
+              <p style={{ marginTop: 16 }}>Whether you&apos;re looking for adventure, relaxation or cultural discovery, we ensure your journey is seamless, safe and truly memorable. From the first message to your final farewell at the airport, you travel with people who know - and love - every corner of this island.</p>
               <div style={{ marginTop: 28 }}><Link className="btn btn--primary" href="/contact">Start Planning <Ic name="arrow" /></Link></div>
             </div>
           </div>
@@ -94,9 +94,9 @@ export default function About() {
               <h2 style={{ marginTop: 18 }}>No two travellers are the same</h2>
               <p className="lead" style={{ marginTop: 18 }}>That&apos;s why no two {BRAND} itineraries are either. We listen first, then design around your pace, your interests and your budget.</p>
               <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: 16, marginTop: 22 }}>
-                <li className="ck-row"><span className="ck-ic"><Ic name="check" /></span><span><b>Personal from day one</b> — a dedicated trip designer, not a call centre.</span></li>
-                <li className="ck-row"><span className="ck-ic"><Ic name="check" /></span><span><b>Honest local knowledge</b> — the right places, at the right time, away from the crowds.</span></li>
-                <li className="ck-row"><span className="ck-ic"><Ic name="check" /></span><span><b>Seamless on the ground</b> — trusted drivers, hand-picked stays and 24/7 support.</span></li>
+                <li className="ck-row"><span className="ck-ic"><Ic name="check" /></span><span><b>Personal from day one</b> - a dedicated trip designer, not a call centre.</span></li>
+                <li className="ck-row"><span className="ck-ic"><Ic name="check" /></span><span><b>Honest local knowledge</b> - the right places, at the right time, away from the crowds.</span></li>
+                <li className="ck-row"><span className="ck-ic"><Ic name="check" /></span><span><b>Seamless on the ground</b> - trusted drivers, hand-picked stays and 24/7 support.</span></li>
               </ul>
             </div>
           </div>

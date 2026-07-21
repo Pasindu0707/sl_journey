@@ -1,8 +1,11 @@
 export const BRAND = "SL Journey";
 export const TAGLINE = "Explore the Soul of Sri Lanka";
-export const PHONE = "+94 77 619 4579";
-export const PHONE_RAW = "+94776194579";
-export const WA = "94776194579";
+// One number for everything: the tel: links, the displayed number and WhatsApp.
+// PHONE is the human form, PHONE_RAW the E.164 form for tel:/schema, WA the same
+// without the "+" (wa.me will not accept a leading plus).
+export const PHONE = "+94 77 740 6309";
+export const PHONE_RAW = "+94777406309";
+export const WA = "94777406309";
 export const EMAIL = "hello@sljourney.com";
 export const ADDRESS = "No: 40A/1, Dummaladeniya North, Wennappuwa, Sri Lanka";
 export const SITEURL = "https://sljourney.com";

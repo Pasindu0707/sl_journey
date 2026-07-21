@@ -83,7 +83,7 @@ export const PACKAGES: Package[] = [
     priceUnit: "pp",
     route: "Pinnawala · Sigiriya · Dambulla · Polonnaruwa · Anuradhapura · Kandy · Nuwara Eliya · Ella · Yala · Mirissa · Galle · Colombo",
     intro:
-      "Step into Sri Lanka's living heritage with a ten-day cultural odyssey that captures the island's true spirit. Journey through the ancient cities of Anuradhapura and Polonnaruwa, marvel at the rock fortress of Sigiriya, and soak in the scenic beauty of Ella. Ride the world-famous hill country train, explore sacred temples, and witness the vibrant rhythms of traditional dance. Round off your experience with the wild charm of Yala and the serene beaches of the southern coast. This is more than a holiday — it's a cultural odyssey through Sri Lanka's timeless wonders.",
+      "Step into Sri Lanka's living heritage with a ten-day cultural odyssey that captures the island's true spirit. Journey through the ancient cities of Anuradhapura and Polonnaruwa, marvel at the rock fortress of Sigiriya, and soak in the scenic beauty of Ella. Ride the world-famous hill country train, explore sacred temples, and witness the vibrant rhythms of traditional dance. Round off your experience with the wild charm of Yala and the serene beaches of the southern coast. This is more than a holiday - it's a cultural odyssey through Sri Lanka's timeless wonders.",
     attractions: [
       "Pinnawala Elephant Orphanage", "Spice & Herbal Garden", "Sigiriya Lion Rock",
       "Sigiriya Village Tour", "Dambulla Cave Temple", "Polonnaruwa Ancient City",
@@ -139,7 +139,7 @@ export const PACKAGES: Package[] = [
 
 export const FEATURES: [string, string, string][] = [
   ["compass", "Superior Service", "Friendly, knowledgeable guides and full support from the first message to the final farewell."],
-  ["gift", "Customised Packages", "Every itinerary is shaped around your pace, interests and budget — never off-the-shelf."],
+  ["gift", "Customised Packages", "Every itinerary is shaped around your pace, interests and budget - never off-the-shelf."],
   ["users", "Expert Local Guides", "Discover the island's culture, wildlife and hidden corners with passionate local experts."],
   ["shield", "Safe & Reliable", "Trusted drivers, vetted hotels and 24/7 care so you can travel with complete peace of mind."],
 ];
@@ -149,10 +149,10 @@ export const EXPERIENCES: [string, string, string, string][] = [
   ["kandy-temple", "Heritage", "Cultural Exploration", "Discover the island's soul at Sigiriya, Anuradhapura and the sacred Temple of the Tooth in Kandy."],
   ["adams-peak", "Trekking", "Hiking & Trekking", "Conquer Ella Rock, Adam's Peak and the wild ridges of the Knuckles Mountain Range."],
   ["surf-sunset", "Ocean", "Diving & Surfing", "Dive coral reefs and shipwrecks, then surf world-class breaks at Arugam Bay and Hikkaduwa."],
-  ["river-safari", "Adventure", "White-Water Rafting", "Ride the Kelani River rapids in Kitulgala — the island's ultimate water adventure."],
+  ["river-safari", "Adventure", "White-Water Rafting", "Ride the Kelani River rapids in Kitulgala - the island's ultimate water adventure."],
   ["train-ella", "Scenic", "Train Journeys", "The Kandy–Ella ride is one of the world's most beautiful, crossing the iconic Nine Arch Bridge."],
   ["cave-view", "Nature", "Rainforest Trails", "Explore Sinharaja, a UNESCO rainforest brimming with endemic birds, life and ancient calm."],
-  ["mirissa-bay", "Marine", "Whale Watching", "See blue whales, sperm whales and dolphins off Mirissa — at their best from November to April."],
+  ["mirissa-bay", "Marine", "Whale Watching", "See blue whales, sperm whales and dolphins off Mirissa - at their best from November to April."],
 ];
 
 export const DESTINATIONS: [string, string][] = [
@@ -162,7 +162,7 @@ export const DESTINATIONS: [string, string][] = [
 ];
 
 export const REVIEWS: [string, string, string, string][] = [
-  ["Anne R.", "Italy", "Very good experience — we highly recommend it",
+  ["Anne R.", "Italy", "Very good experience - we highly recommend it",
     "Mr. Sudam was a wonderful driver: thoughtful and attentive to everyone, especially the children. We highly recommend SL Journey to anyone visiting Sri Lanka."],
   ["Yasith P.", "Sri Lanka", "The beauty of the deep south",
     "“Ayubowan!” I returned to my motherland after six years and it felt so good. I loved the beautiful environment and the seamless journey. Thank you so much, SL Journey."],
@@ -220,15 +220,15 @@ export const BLOG: Post[] = [
     title: "Best Time to Visit Sri Lanka",
     img: "ella-ninearch",
     date: "2025-09-12",
-    excerpt: "A year-round island with two monsoons — here's how to pick the perfect season for your coast and your kind of adventure.",
+    excerpt: "A year-round island with two monsoons - here's how to pick the perfect season for your coast and your kind of adventure.",
     next: ["cuisine", "Sri Lankan Cuisine: A Taste of Authentic Flavours"],
     body: [
       { t: "p", v: "Sri Lanka is a year-round destination, but the best time to visit truly depends on the region you wish to explore. With two distinct monsoons crossing the island, there is almost always sunshine somewhere." },
       { t: "h2", v: "West & South Coasts + Hill Country" },
-      { t: "p", v: "From December to April, the west and south coasts and the central hill country enjoy sunny, dry weather — ideal for beach holidays, whale watching and exploring tea country." },
+      { t: "p", v: "From December to April, the west and south coasts and the central hill country enjoy sunny, dry weather - ideal for beach holidays, whale watching and exploring tea country." },
       { t: "h2", v: "East Coast" },
       { t: "p", v: "From May to September, the east comes alive. This is the ideal window for surfing, diving and beach relaxation in Trincomalee, Arugam Bay and Pasikudah." },
-      { t: "quote", v: "With its tropical climate, Sri Lanka welcomes travellers with sunshine almost throughout the year — a versatile destination for every season." },
+      { t: "quote", v: "With its tropical climate, Sri Lanka welcomes travellers with sunshine almost throughout the year - a versatile destination for every season." },
     ],
   },
   {
@@ -242,10 +242,10 @@ export const BLOG: Post[] = [
     body: [
       { t: "p", v: "Sri Lankan food is a burst of flavours, shaped by centuries of culture and trade. Known for its generous use of spices, coconut and rice, every meal here is a feast for the senses." },
       { t: "list", v: [
-        ["Rice & Curry", "The island's staple — fragrant rice served with an array of vegetable, fish or meat curries."],
+        ["Rice & Curry", "The island's staple - fragrant rice served with an array of vegetable, fish or meat curries."],
         ["Hoppers (Appa)", "Crispy, bowl-shaped pancakes, often enjoyed for breakfast with an egg cracked in the centre."],
         ["Kottu Roti", "A beloved street food of chopped roti stir-fried with vegetables, egg and spices to a rhythmic clatter."],
-        ["Ceylon Tea", "World-famous tea grown in the misty central highlands — best enjoyed with a hilltop view."],
+        ["Ceylon Tea", "World-famous tea grown in the misty central highlands - best enjoyed with a hilltop view."],
       ]},
       { t: "quote", v: "No trip to Sri Lanka is complete without surrendering to the island's culinary delights." },
     ],
@@ -255,7 +255,7 @@ export const BLOG: Post[] = [
     title: "Top Things to Do in Sri Lanka",
     img: "sigiriya",
     date: "2025-09-12",
-    excerpt: "From ancient rock fortresses to leopard safaris and the world's most scenic train ride — the experiences that define the island.",
+    excerpt: "From ancient rock fortresses to leopard safaris and the world's most scenic train ride - the experiences that define the island.",
     prev: ["cuisine", "Sri Lankan Cuisine: A Taste of Authentic Flavours"],
     next: ["discover", "Discover Sri Lanka: The Pearl of the Indian Ocean"],
     body: [
@@ -274,12 +274,12 @@ export const BLOG: Post[] = [
     title: "Discover Sri Lanka: The Pearl of the Indian Ocean",
     img: "beach-sunset",
     date: "2025-09-12",
-    excerpt: "Golden beaches, lush tea plantations, ancient ruins and warm hospitality — why this little island leaves such a lasting impression.",
+    excerpt: "Golden beaches, lush tea plantations, ancient ruins and warm hospitality - why this little island leaves such a lasting impression.",
     prev: ["things-to-do", "Top Things to Do in Sri Lanka"],
     body: [
       { t: "p", v: "Sri Lanka, often called the “Pearl of the Indian Ocean,” is a tropical paradise that blends golden beaches, lush tea plantations, ancient ruins and vibrant culture. From the sacred city of Anuradhapura to the misty hills of Nuwara Eliya, every corner of the island tells a story of history and beauty." },
-      { t: "p", v: "Visitors can enjoy a wonderful variety of experiences — exploring UNESCO World Heritage sites, embarking on wildlife safaris in Yala, or simply relaxing along the palm-fringed beaches of Mirissa and Bentota." },
-      { t: "quote", v: "With warm hospitality and mouth-watering cuisine, Sri Lanka is not just a destination — it's an experience that stays with you forever." },
+      { t: "p", v: "Visitors can enjoy a wonderful variety of experiences - exploring UNESCO World Heritage sites, embarking on wildlife safaris in Yala, or simply relaxing along the palm-fringed beaches of Mirissa and Bentota." },
+      { t: "quote", v: "With warm hospitality and mouth-watering cuisine, Sri Lanka is not just a destination - it's an experience that stays with you forever." },
     ],
   },
 ];

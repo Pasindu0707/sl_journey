@@ -31,7 +31,7 @@ export default function Footer() {
                 <img src={asset("/assets/logo/logo-mark-white.png")} alt="" /> {BRAND}
               </div>
               <p>
-                We craft unforgettable, tailor-made journeys across Sri Lanka — blending
+                We craft unforgettable, tailor-made journeys across Sri Lanka - blending
                 culture, wildlife, hill country and golden coastlines with the warmth of
                 true local hospitality.
               </p>

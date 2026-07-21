@@ -105,6 +105,8 @@ p{color:var(--ink-soft)}
 .section-head.center{margin-inline:auto;text-align:center}
 .section-head h2{margin-top:18px}
 .section-head p{margin-top:16px}
+/* "See all" link under a trimmed grid. */
+.section-more{display:flex;justify-content:center;margin-top:clamp(28px,4vw,44px)}
 .grid{display:grid;gap:clamp(18px,2.4vw,30px)}
 .cols-2{grid-template-columns:repeat(2,1fr)}
 .cols-3{grid-template-columns:repeat(3,1fr)}
@@ -478,8 +480,13 @@ font[style]{background:transparent!important;box-shadow:none!important}
 .attr span{font-size:.92rem;font-weight:500;line-height:1.3}
 
 .pkg-meta{display:flex;flex-wrap:wrap;gap:14px;margin-top:26px}
-.pkg-meta .chip{display:flex;align-items:center;gap:9px;background:var(--surface);border:1px solid var(--line);border-radius:100px;padding:.6em 1.1em;font-size:.88rem;font-weight:500}
-.pkg-meta .chip svg{width:17px;height:17px;color:var(--gold-600)}
+/* These chips sit inside .subhero, which sets color:#fff over a dark photo. They
+   previously used the light --surface/--line tokens, so it was white text on a
+   white pill — a 1:1 contrast ratio, i.e. completely invisible. Glass over the
+   photo instead, and the lighter gold-400 for the icons since gold-600 is too
+   dark to read against the image. */
+.pkg-meta .chip{display:flex;align-items:center;gap:9px;background:rgba(9,18,38,.5);border:1px solid rgba(255,255,255,.34);border-radius:100px;padding:.6em 1.1em;font-size:.88rem;font-weight:500;color:#fff;backdrop-filter:blur(6px)}
+.pkg-meta .chip svg{width:17px;height:17px;color:var(--gold-400)}
 
 /* sticky booking aside */
 .book-aside{position:sticky;top:96px}

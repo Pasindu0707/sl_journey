@@ -63,7 +63,16 @@ export default function Header() {
               <Link href="/#packages">Tour Packages<i className="caret" /></Link>
               <div className="drop">
                 {PACKAGES.map((p) => (
-                  <Link key={p.slug} href={`/packages/${p.slug}`}>
+                  <Link
+                    key={p.slug}
+                    href={`/packages/${p.slug}`}
+                    // The dropdown is held open by CSS :hover OR :focus-within.
+                    // Clicking a package navigates client-side, so the link keeps
+                    // DOM focus and :focus-within stays true — the menu was still
+                    // hanging open over the page you just landed on. Dropping
+                    // focus closes it the moment the pointer leaves.
+                    onClick={(e) => e.currentTarget.blur()}
+                  >
                     {p.name}
                     <small>{p.days}</small>
                   </Link>

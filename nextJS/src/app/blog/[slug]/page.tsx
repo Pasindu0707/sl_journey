@@ -41,7 +41,7 @@ function renderBlock(block: Block, i: number) {
       return (
         <ul className="dash" key={i}>
           {block.v.map(([t, d]) => (
-            <li key={t}><b>{t}</b> — {d}</li>
+            <li key={t}><b>{t}</b> - {d}</li>
           ))}
         </ul>
       );
