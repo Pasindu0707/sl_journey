@@ -45,11 +45,16 @@ export const GOOGLE_SITE_VERIFICATION = "";
 
 // Social + review profiles.
 //
-// TODO: fill these in. Leave any unknown URL as "" — the Footer skips empty ones
-// rather than rendering a dead icon, and SOCIALS below feeds schema.org sameAs,
-// where a wrong URL claims someone else's profile as ours. Never guess these.
-export const INSTAGRAM = "";
-export const FACEBOOK = "";
+// Leave any unknown URL as "" — the Footer skips empty ones rather than
+// rendering a dead icon, and SOCIALS below feeds schema.org sameAs, where a
+// wrong URL claims someone else's profile as ours. Never guess these.
+export const INSTAGRAM = "https://www.instagram.com/_sl_journey_/";
+// The numeric profile.php?id= form is what Facebook serves until a page claims a
+// vanity username. It resolves correctly and is fine for sameAs; if you later set
+// a username (facebook.com/sljourney), update this to the tidier URL.
+export const FACEBOOK = "https://www.facebook.com/profile.php?id=61590067873645";
+// TODO: still unset. The homepage hero claims "Rated Excellent on Tripadvisor"
+// as plain text because of this — fill it in to make that a real link.
 export const TRIPADVISOR = "";
 
 /** Non-empty profile URLs, for JSON-LD sameAs. */
