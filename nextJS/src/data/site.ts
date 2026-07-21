@@ -24,6 +24,16 @@ export const STREET = "No: 40A/1, Dummaladeniya North";
 export const LOCALITY = "Wennappuwa";
 export const COUNTRY = "LK";
 
+// Last date the site's copy actually changed (ISO, YYYY-MM-DD). Feeds <lastmod>
+// in sitemap.xml for every page that has no date of its own — blog posts use
+// their own `date` instead.
+//
+// Bump this by hand when you edit content. It is deliberately NOT `new Date()`:
+// a build-time stamp moves on every deploy even when nothing changed, and Google
+// starts ignoring <lastmod> from sites that do that. Slightly stale beats
+// meaningless.
+export const CONTENT_UPDATED = "2026-07-21";
+
 // Google Search Console verification. In Search Console, add a "URL prefix"
 // property for https://sljourney.com, pick the "HTML tag" method, and paste ONLY
 // the content value here (the part in content="..."). Empty = no tag is emitted.

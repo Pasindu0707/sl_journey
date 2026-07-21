@@ -7,6 +7,9 @@
 // your own organisation is ignored by Google and risks a manual action, so the
 // "Rated Excellent on Tripadvisor" claim is linked out to the real profile
 // instead of marked up here.
+//
+// Also deliberately absent: Product. A tour is not a retail good — see the note
+// on packageSchema below.
 
 import {
   ADDRESS,
@@ -52,10 +55,31 @@ export function travelAgencySchema() {
   };
 }
 
+/**
+ * A tour package as a TouristTrip, not a Product.
+ *
+ * These pages were previously marked up as `Product`, which put the site in
+ * Search Console's "Merchant listings" and "Product snippets" reports and drew
+ * warnings for four fields that cannot honestly be supplied:
+ *
+ *   shippingDetails / hasMerchantReturnPolicy — a guided tour is not shipped and
+ *     cannot be returned, so any value here would be fiction.
+ *   aggregateRating / review — we have no verifiable first-party review corpus,
+ *     and inventing one is a manual-action risk (see the note at the top).
+ *
+ * Product is also simply the wrong claim: it advertises a fixed price and
+ * `InStock` availability for something with no checkout — every package is an
+ * enquiry, quoted per trip. That mismatch is exactly what Google's merchant
+ * cross-validation looks for. TouristTrip describes the same thing accurately,
+ * carries the same Offer, and drops out of both reports.
+ *
+ * TouristTrip has no rich result in Google Search. Neither did this page in
+ * practice: a Product snippet needs a rating to render, and we have none.
+ */
 export function packageSchema(p: Package) {
   return {
     "@context": "https://schema.org",
-    "@type": "Product",
+    "@type": "TouristTrip",
     name: p.name,
     // The Offer price is a bare number with no unit, so the basis (per person vs
     // per couple) is stated here or it is simply lost. Honeymoon Vibes is priced
@@ -65,7 +89,17 @@ export function packageSchema(p: Package) {
     )} USD ${priceBasis(p)}. ${p.intro}`,
     image: abs(`/assets/img/lib/${p.hero}.jpg`),
     url: abs(`/packages/${p.slug}/`),
-    brand: { "@type": "Brand", name: BRAND },
+    provider: { "@id": `${SITEURL}/#organization` },
+    // The visible "Tour Highlights" list, in the order the page renders it.
+    itinerary: {
+      "@type": "ItemList",
+      numberOfItems: p.attractions.length,
+      itemListElement: p.attractions.map((a, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        item: { "@type": "TouristAttraction", name: a },
+      })),
+    },
     offers: {
       "@type": "Offer",
       price: p.priceUSD,
@@ -73,6 +107,19 @@ export function packageSchema(p: Package) {
       availability: "https://schema.org/InStock",
       url: abs(`/packages/${p.slug}/`),
       seller: { "@id": `${SITEURL}/#organization` },
+      // Machine-readable form of the same per-person / per-couple basis spelled
+      // out in the description above.
+      priceSpecification: {
+        "@type": "UnitPriceSpecification",
+        price: p.priceUSD,
+        priceCurrency: "USD",
+        referenceQuantity: {
+          "@type": "QuantitativeValue",
+          value: p.priceUnit === "couple" ? 2 : 1,
+          unitCode: "IE", // UN/CEFACT: person
+          unitText: "person",
+        },
+      },
     },
   };
 }

@@ -27,6 +27,32 @@ export const priceLabel = (p: Package) =>
 export const priceBasis = (p: Package) =>
   p.priceUnit === "couple" ? "per couple" : "per person";
 
+/**
+ * Trims prose to `max` characters without cutting mid-word.
+ *
+ * Prefers to stop on a full sentence when one lands in the back of the budget,
+ * and only falls back to a word boundary with an ellipsis. A blunt slice(0, 155)
+ * produced descriptions ending "...elephants at Pinnawala," — a dangling comma
+ * that reads as a bug to anyone viewing source, and to Google.
+ */
+const clamp = (s: string, max: number) => {
+  if (s.length <= max) return s;
+  const cut = s.slice(0, max);
+  const sentence = cut.lastIndexOf(". ");
+  if (sentence > max * 0.6) return cut.slice(0, sentence + 1);
+  const word = cut.lastIndexOf(" ");
+  return `${cut.slice(0, word > 0 ? word : max).replace(/[\s,;:—-]+$/, "")}…`;
+};
+
+/**
+ * Meta description for a package page: the two facts a searcher is scanning for
+ * (how long, how much) before the prose, since Google truncates the tail.
+ */
+export const packageDescription = (p: Package) => {
+  const lead = `${p.dur} · ${priceLabel(p)}. `;
+  return lead + clamp(p.intro, 155 - lead.length);
+};
+
 export const PACKAGES: Package[] = [
   {
     slug: "hill-country",

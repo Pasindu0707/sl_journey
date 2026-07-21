@@ -81,6 +81,12 @@ Almost everything lives in two files:
 - **`src/data/content.ts`** — tour packages, blog posts, gallery captions,
   reviews, homepage sections.
 
+When you change copy, bump **`CONTENT_UPDATED`** in `site.ts`. It is the
+`<lastmod>` date in `sitemap.xml` for every page except blog posts, which use
+their own `date`. It is a hand-maintained constant on purpose: a build-time
+`new Date()` would move on every deploy even when nothing changed, and Google
+learns to ignore `<lastmod>` from sites that do that.
+
 Prices are structured, not strings: set `priceUSD` (a number) and `priceUnit`
 (`"pp"` or `"couple"`). The displayed label (`From $640 pp`) and the `Offer`
 price in the structured data are both derived from those, so they cannot drift
@@ -136,17 +142,36 @@ Nothing outside `nextJS/` is deployed.
 
 ### Custom domain
 
-Three things have to agree:
+`sljourney.com` resolves to **Cloudflare**, which proxies through to GitHub
+Pages. Response headers confirm both hops (`Server: cloudflare` in front of
+`x-github-request-id`). That means DNS, TLS and redirects are settled in the
+Cloudflare dashboard, *not* in GitHub's Pages settings.
+
+Things that have to agree:
 
 1. **`nextJS/public/CNAME`** contains exactly `sljourney.com`. Everything in
    `public/` is copied into `out/`, so this survives every rebuild. Deleting it
    will drop the custom domain the next time Pages deploys, because
    `upload-pages-artifact` replaces the whole site.
 2. **Repo Settings → Pages → Custom domain** is set to `sljourney.com`.
-3. **Repo Settings → Pages → Enforce HTTPS** is ticked.
+3. **Cloudflare → SSL/TLS → Edge Certificates → Always Use HTTPS** is **on**.
 
 The CNAME file is pinned to LF in `.gitattributes` — GitHub Pages reads it
 byte-for-byte and a CRLF can invalidate the domain.
+
+#### Why point 3 matters
+
+Because Cloudflare terminates TLS at the edge, GitHub's own "Enforce HTTPS"
+checkbox never sees the visitor's request and cannot redirect them. Without
+"Always Use HTTPS", `http://sljourney.com/` answers **200 OK** with no redirect
+— every page is reachable over plaintext, which is what puts URLs in Search
+Console's HTTPS report as "not served over HTTPS". Verify with:
+
+```bash
+curl -sI http://sljourney.com/ | head -1   # want: HTTP/1.1 301 Moved Permanently
+```
+
+`www.sljourney.com` already 301s to the apex, so only the scheme needs fixing.
 
 ## Hosting note: this repo is public
 
@@ -156,18 +181,22 @@ setup and is fine: this is a marketing site whose content is public anyway, and
 it contains no secrets.
 
 If you want the source private at no cost, **Cloudflare Pages** builds from a
-private GitHub repo on its free tier. It is the same static output, so no code
+private GitHub repo on its free tier. The DNS already lives at Cloudflare, so
+this is a shorter move than it looks, and it is the same static output — no code
 changes are needed:
 
 - Build command `npm run build`, output directory `out`, root directory `nextJS`.
-- Move the `sljourney.com` DNS to Cloudflare and point the domain at the Pages
-  project.
+- Point the existing `sljourney.com` zone at the Pages project instead of at
+  GitHub Pages.
 - Set `NEXT_PUBLIC_WEB3FORMS_KEY` in the project's environment variables.
 - The `CNAME` file is GitHub-specific and simply ignored there — harmless.
 
-That also buys response headers (HSTS, CSP, Referrer-Policy), which GitHub Pages
-cannot set at all. Netlify's free tier works the same way. Vercel's free tier is
-non-commercial only, so it is not appropriate for a tour business.
+Netlify's free tier works the same way. Vercel's free tier is non-commercial
+only, so it is not appropriate for a tour business.
+
+Note that response headers (HSTS, CSP, Referrer-Policy) are **already available
+today** via Cloudflare Transform Rules, without moving anything — GitHub Pages
+cannot set them, but the proxy in front of it can.
 
 ## A note on the language switcher
 

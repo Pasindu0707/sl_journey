@@ -59,8 +59,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <style>{`[data-reveal],[data-stagger]>*{opacity:1!important;transform:none!important}`}</style>
         </noscript>
         <a href="#main" className="skip-link">Skip to content</a>
-        {/* Sitewide so that the seller/publisher @id references emitted by the
-            Product and BlogPosting schemas resolve on the page carrying them. */}
+        {/* Sitewide so that the provider/seller/publisher @id references emitted
+            by the TouristTrip and BlogPosting schemas resolve on the page
+            carrying them. */}
         <JsonLd data={travelAgencySchema()} />
         <Header />
         {children}

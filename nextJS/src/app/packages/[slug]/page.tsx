@@ -6,7 +6,7 @@ import Ic from "@/components/Ic";
 import EnquiryForm from "@/components/EnquiryForm";
 import JsonLd from "@/components/JsonLd";
 import { CtaBand } from "@/components/cards";
-import { PACKAGES, img, priceLabel } from "@/data/content";
+import { PACKAGES, img, packageDescription, priceLabel } from "@/data/content";
 import { dims } from "@/data/image-dims";
 import { breadcrumbSchema, packageSchema } from "@/lib/schema";
 import { BRAND, waLink } from "@/data/site";
@@ -20,9 +20,11 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   if (!p) return {};
   return {
     title: `${p.name} — ${p.dur}`,
-    description: p.intro.slice(0, 155),
+    description: packageDescription(p),
     alternates: { canonical: `/packages/${p.slug}/` },
     openGraph: {
+      title: `${p.name} — ${p.dur}`,
+      description: packageDescription(p),
       url: `/packages/${p.slug}/`,
       images: [`/assets/img/lib/${p.hero}.jpg`],
     },
