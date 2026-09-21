@@ -87,10 +87,8 @@ their own `date`. It is a hand-maintained constant on purpose: a build-time
 `new Date()` would move on every deploy even when nothing changed, and Google
 learns to ignore `<lastmod>` from sites that do that.
 
-Prices are structured, not strings: set `priceUSD` (a number) and `priceUnit`
-(`"pp"` or `"couple"`). The displayed label (`From $640 pp`) and the `Offer`
-price in the structured data are both derived from those, so they cannot drift
-apart. Blog `date` is ISO (`YYYY-MM-DD`) and drives both the visible date and
+Packages deliberately carry no prices - every trip is quoted on enquiry, so
+don't add a price to the cards, package pages or structured data. Blog `date` is ISO (`YYYY-MM-DD`) and drives both the visible date and
 `datePublished`.
 
 ### Adding a photo

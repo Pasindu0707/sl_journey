@@ -8,24 +8,10 @@ export type Package = {
   days: string;
   img: string;
   hero: string;
-  /** Lead-in price in USD. Kept numeric so Offer schema can use it directly. */
-  priceUSD: number;
-  /** "pp" = per person; "couple" = total for two. Honeymoon Vibes is per couple. */
-  priceUnit: "pp" | "couple";
   route: string;
   intro: string;
   attractions: string[];
 };
-
-/** Display price, e.g. "From $640 pp" / "From $1,690 / couple". */
-export const priceLabel = (p: Package) =>
-  `From $${p.priceUSD.toLocaleString("en-US")} ${
-    p.priceUnit === "couple" ? "/ couple" : "pp"
-  }`;
-
-/** Spells out the pricing basis for schema descriptions, which have no context. */
-export const priceBasis = (p: Package) =>
-  p.priceUnit === "couple" ? "per couple" : "per person";
 
 /**
  * Trims prose to `max` characters without cutting mid-word.
@@ -46,10 +32,10 @@ const clamp = (s: string, max: number) => {
 
 /**
  * Meta description for a package page: the two facts a searcher is scanning for
- * (how long, how much) before the prose, since Google truncates the tail.
+ * (how long, and that it is private) before the prose, since Google truncates the tail.
  */
 export const packageDescription = (p: Package) => {
-  const lead = `${p.dur} · ${priceLabel(p)}. `;
+  const lead = `${p.dur} · private tour. `;
   return lead + clamp(p.intro, 155 - lead.length);
 };
 
@@ -61,8 +47,6 @@ export const PACKAGES: Package[] = [
     days: "4 Days · 3 Nights",
     img: "train-ella",
     hero: "nuwara-eliya",
-    priceUSD: 640,
-    priceUnit: "pp",
     route: "Pinnawala · Kandy · Peradeniya · Nuwara Eliya · Kithulgala · Colombo",
     intro:
       "Discover the magic of Sri Lanka's hill country on a journey filled with beauty, culture, and adventure. Witness the charm of gentle elephants at Pinnawala, pay homage at the Temple of the Sacred Tooth Relic, and wander through lush botanical gardens. Savour the taste of world-famous Ceylon tea, experience the thrill of white-water rafting in Kithulgala, and wrap up your adventure with an exciting tour of Colombo. A perfect escape for those who love both nature and adrenaline.",
@@ -79,8 +63,6 @@ export const PACKAGES: Package[] = [
     days: "10 Days · 9 Nights",
     img: "sigiriya",
     hero: "anuradhapura",
-    priceUSD: 1490,
-    priceUnit: "pp",
     route: "Pinnawala · Sigiriya · Dambulla · Polonnaruwa · Anuradhapura · Kandy · Nuwara Eliya · Ella · Yala · Mirissa · Galle · Colombo",
     intro:
       "Step into Sri Lanka's living heritage with a ten-day cultural odyssey that captures the island's true spirit. Journey through the ancient cities of Anuradhapura and Polonnaruwa, marvel at the rock fortress of Sigiriya, and soak in the scenic beauty of Ella. Ride the world-famous hill country train, explore sacred temples, and witness the vibrant rhythms of traditional dance. Round off your experience with the wild charm of Yala and the serene beaches of the southern coast. This is more than a holiday - it's a cultural odyssey through Sri Lanka's timeless wonders.",
@@ -102,8 +84,6 @@ export const PACKAGES: Package[] = [
     days: "8 Days · 7 Nights",
     img: "beach-boats",
     hero: "galle-fort",
-    priceUSD: 1180,
-    priceUnit: "pp",
     route: "Colombo · Balapitiya · Bentota · Hikkaduwa · Galle · Mirissa · Hiriketiya",
     intro:
       "Uncover the tropical beauty of Sri Lanka's southern coast on this unforgettable eight-day journey. Start with the buzzing energy of Colombo and the iconic Lotus Tower before gliding along the tranquil waters of the Madu River. Explore historic coastal forts, relax on golden beaches, and dive into adventure with water sports and whale watching. Along the way, witness traditions like stilt fishing that keep the island's coastal culture alive. A perfect blend of sunshine, adventure, and heritage for every traveller.",
@@ -121,8 +101,6 @@ export const PACKAGES: Package[] = [
     days: "9 Days · 8 Nights",
     img: "beach-sunset",
     hero: "beach-sunset",
-    priceUSD: 1690,
-    priceUnit: "couple",
     route: "Pinnawala · Sigiriya · Kandy · Nuwara Eliya · Ella · Yala · Mirissa · Galle · Balapitiya · Colombo",
     intro:
       "Begin your new journey together with a romantic escape through Sri Lanka's most dreamy landscapes. Share scenic train rides, drift across peaceful lakes, and embrace the lively charm of Ella, Mirissa, Galle, and Colombo. Discover wonders like Sigiriya and Yala, indulge in golden beach sunsets, and enjoy moments of adventure, culture, and pure relaxation. Designed for couples, this tour is all about creating timeless memories in paradise.",

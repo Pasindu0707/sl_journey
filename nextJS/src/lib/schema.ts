@@ -1,7 +1,7 @@
 // JSON-LD builders. Pure functions only — no JSX (that lives in components/).
 //
 // Everything here is derived from site.ts / content.ts rather than restated, so
-// a price or brand change flows into the structured data automatically.
+// a package or brand change flows into the structured data automatically.
 //
 // Deliberately absent: aggregateRating and Review. Self-serving review markup on
 // your own organisation is ignored by Google and risks a manual action, so the
@@ -23,7 +23,7 @@ import {
   STREET,
   TAGLINE,
 } from "@/data/site";
-import { PACKAGES, priceBasis, type Package, type Post } from "@/data/content";
+import { PACKAGES, type Package, type Post } from "@/data/content";
 
 /** Absolute URL for a root-relative path. Schema requires absolute URLs. */
 const abs = (path: string) => new URL(path, SITEURL).toString();
@@ -59,8 +59,6 @@ export function travelAgencySchema() {
       itemListElement: PACKAGES.map((p) => ({
         "@type": "Offer",
         name: `${p.name} - ${p.dur} private tour`,
-        price: p.priceUSD,
-        priceCurrency: "USD",
         url: abs(`/packages/${p.slug}/`),
         itemOffered: {
           "@type": "TouristTrip",
@@ -91,7 +89,7 @@ export function travelAgencySchema() {
  * `InStock` availability for something with no checkout — every package is an
  * enquiry, quoted per trip. That mismatch is exactly what Google's merchant
  * cross-validation looks for. TouristTrip describes the same thing accurately,
- * carries the same Offer, and drops out of both reports.
+ * and drops out of both reports.
  *
  * TouristTrip has no rich result in Google Search. Neither did this page in
  * practice: a Product snippet needs a rating to render, and we have none.
@@ -101,12 +99,7 @@ export function packageSchema(p: Package) {
     "@context": "https://schema.org",
     "@type": "TouristTrip",
     name: p.name,
-    // The Offer price is a bare number with no unit, so the basis (per person vs
-    // per couple) is stated here or it is simply lost. Honeymoon Vibes is priced
-    // per couple, and reading it as per-person would understate it by half.
-    description: `${p.dur} Sri Lanka tour. From $${p.priceUSD.toLocaleString(
-      "en-US"
-    )} USD ${priceBasis(p)}. ${p.intro}`,
+    description: `${p.dur} private Sri Lanka tour. ${p.intro}`,
     image: abs(`/assets/img/lib/${p.hero}.jpg`),
     url: abs(`/packages/${p.slug}/`),
     provider: { "@id": `${SITEURL}/#organization` },
@@ -120,27 +113,8 @@ export function packageSchema(p: Package) {
         item: { "@type": "TouristAttraction", name: a },
       })),
     },
-    offers: {
-      "@type": "Offer",
-      price: p.priceUSD,
-      priceCurrency: "USD",
-      availability: "https://schema.org/InStock",
-      url: abs(`/packages/${p.slug}/`),
-      seller: { "@id": `${SITEURL}/#organization` },
-      // Machine-readable form of the same per-person / per-couple basis spelled
-      // out in the description above.
-      priceSpecification: {
-        "@type": "UnitPriceSpecification",
-        price: p.priceUSD,
-        priceCurrency: "USD",
-        referenceQuantity: {
-          "@type": "QuantitativeValue",
-          value: p.priceUnit === "couple" ? 2 : 1,
-          unitCode: "IE", // UN/CEFACT: person
-          unitText: "person",
-        },
-      },
-    },
+    // No Offer: prices are deliberately not published. Every trip is quoted on
+    // enquiry.
   };
 }
 

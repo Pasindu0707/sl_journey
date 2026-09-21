@@ -2,7 +2,7 @@ import Link from "next/link";
 import Ic from "./Ic";
 import { waLink } from "@/data/site";
 import {
-  img, dateParts, priceLabel, FEATURES, EXPERIENCES, DESTINATIONS, REVIEWS, PACKAGES, BLOG, type Post,
+  img, dateParts, FEATURES, EXPERIENCES, DESTINATIONS, REVIEWS, PACKAGES, BLOG, type Post,
 } from "@/data/content";
 
 export const Stars = ({ n = 5 }: { n?: number }) => (
@@ -37,7 +37,7 @@ export function PackageCards() {
             <h3>{p.name}</h3>
             <p className="pkg__route">{p.route}</p>
             <div className="pkg__foot">
-              <div className="pkg__price">Starting<b>{priceLabel(p)}</b></div>
+              <div className="pkg__price">Private tour<b>Price on request</b></div>
               <span className="pkg__link">View Tour <Ic name="arrow" /></span>
             </div>
           </div>

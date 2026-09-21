@@ -6,7 +6,7 @@ import Ic from "@/components/Ic";
 import EnquiryForm from "@/components/EnquiryForm";
 import JsonLd from "@/components/JsonLd";
 import { CtaBand } from "@/components/cards";
-import { PACKAGES, img, packageDescription, priceLabel } from "@/data/content";
+import { PACKAGES, img, packageDescription } from "@/data/content";
 import { dims } from "@/data/image-dims";
 import { breadcrumbSchema, packageSchema } from "@/lib/schema";
 import { BRAND, waLink } from "@/data/site";
@@ -68,7 +68,7 @@ export default function PackagePage({ params }: { params: { slug: string } }) {
           <div className="pkg-meta">
             <span className="chip"><Ic name="clock" /> {p.dur}</span>
             <span className="chip"><Ic name="pin" /> {p.attractions.length} Destinations</span>
-            <span className="chip"><Ic name="calendar" /> {priceLabel(p)}</span>
+            <span className="chip"><Ic name="calendar" /> Tailor-made dates</span>
           </div>
         </div>
       </section>

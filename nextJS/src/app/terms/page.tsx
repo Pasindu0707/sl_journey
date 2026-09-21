@@ -58,13 +58,12 @@ export default function Terms() {
 
             <h2>Prices and quotes</h2>
             <p>
-              Prices shown on this site are <b>starting from</b> figures in US
-              dollars, given per person on a shared basis unless the package says
-              otherwise - Honeymoon Vibes is priced per couple. They indicate what a
-              trip typically starts at; they are not an offer and are not guaranteed.
+              We do not publish fixed prices. Every trip is private and planned
+              around you, so we quote each one individually in US dollars once we
+              know what you would like.
             </p>
             <p>
-              Your actual price depends on your dates, group size, accommodation
+              Your price depends on your dates, group size, accommodation
               class, meal basis and what is available when you book. Peak season,
               public holidays and festival dates cost more. The price that binds us is
               the one in your written quote, and it holds for the validity period
