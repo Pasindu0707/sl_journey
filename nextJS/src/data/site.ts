@@ -35,7 +35,7 @@ export const COUNTRY = "LK";
 // a build-time stamp moves on every deploy even when nothing changed, and Google
 // starts ignoring <lastmod> from sites that do that. Slightly stale beats
 // meaningless.
-export const CONTENT_UPDATED = "2026-07-21";
+export const CONTENT_UPDATED = "2026-09-23";
 
 // Google Search Console verification. In Search Console, add a "URL prefix"
 // property for https://sljourney.com, pick the "HTML tag" method, and paste ONLY

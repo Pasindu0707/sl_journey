@@ -8,6 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const pages: { path: string; lastModified: string; priority: number }[] = [
     { path: "/", lastModified: CONTENT_UPDATED, priority: 1 },
     { path: "/about/", lastModified: CONTENT_UPDATED, priority: 0.7 },
+    { path: "/build-my-journey/", lastModified: CONTENT_UPDATED, priority: 0.9 },
     { path: "/blog/", lastModified: CONTENT_UPDATED, priority: 0.7 },
     { path: "/gallery/", lastModified: CONTENT_UPDATED, priority: 0.7 },
     { path: "/contact/", lastModified: CONTENT_UPDATED, priority: 0.7 },

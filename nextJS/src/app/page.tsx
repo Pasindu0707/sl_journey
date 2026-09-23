@@ -35,7 +35,8 @@ export default function Home() {
           <h1 style={{ marginTop: 20 }}>Discover the <em>real</em><br />Sri Lanka, your way</h1>
           <p className="hero__sub">Tea hills, ancient cities, leopard safaris and golden beaches - designed as one private journey, built around you.</p>
           <div className="hero__cta">
-            <Link className="btn btn--primary btn--lg" href="/#packages">Explore Packages</Link>
+            <Link className="btn btn--primary btn--lg" href="/build-my-journey">Build My Journey <Ic name="arrow" /></Link>
+            <Link className="btn btn--light btn--lg" href="/#packages">Explore Packages</Link>
             <a className="btn btn--light btn--lg" href={waLink()} target="_blank" rel="noopener noreferrer"><Ic name="whatsapp" /> Plan via WhatsApp</a>
           </div>
           <div className="hero__trust">
@@ -102,6 +103,26 @@ export default function Home() {
             <p>Four promises behind every itinerary we design.</p>
           </div>
           <div className="grid cols-4" data-stagger="100"><FeatureCards /></div>
+        </div>
+      </section>
+
+      <section className="section section--tight">
+        <div className="container">
+          <div className="cta-band" data-reveal>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={img("train-ella")} alt="Blue train winding through Sri Lanka's tea country" loading="lazy" />
+            <div className="cta-band__inner">
+              <span className="eyebrow center">Build My Journey</span>
+              <h2 style={{ marginTop: 16 }}>Don&apos;t choose a package.<br />Build your journey.</h2>
+              <p>Answer four quick questions and watch your own Sri Lanka itinerary appear, day by day. Then send it to us and we&apos;ll make it real.</p>
+              <div className="jb-teaser__steps" aria-hidden="true">
+                <span><b>01</b>Days</span><span><b>02</b>Travellers</span><span><b>03</b>Experiences</span><span><b>04</b>Style</span>
+              </div>
+              <div className="hero__cta">
+                <Link className="btn btn--primary btn--lg" href="/build-my-journey">Build My Journey <Ic name="arrow" /></Link>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 

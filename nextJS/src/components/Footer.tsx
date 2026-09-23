@@ -8,8 +8,9 @@ import Ic from "./Ic";
 
 export default function Footer() {
   const quick: [string, string][] = [
-    ["Home", "/"], ["About Us", "/about"], ["Tour Packages", "/#packages"],
-    ["Blog", "/blog"], ["Gallery", "/gallery"], ["Contact Us", "/contact"],
+    // Same order as the header.
+    ["Home", "/"], ["Tour Packages", "/#packages"], ["Build My Journey", "/build-my-journey"],
+    ["About Us", "/about"], ["Blog", "/blog"], ["Gallery", "/gallery"], ["Contact Us", "/contact"],
   ];
 
   // Only profiles with a real URL are rendered. A dead href="#" icon costs trust

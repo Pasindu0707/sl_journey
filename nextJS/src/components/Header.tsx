@@ -59,9 +59,11 @@ export default function Header() {
             <img className="logo-dark" src={asset("/assets/logo/logo-horizontal-trans.png")} alt={BRAND} width={503} height={138} />
           </Link>
 
+          {/* Order follows the usual travel-site pattern: what we sell first
+              (tours, then planning your own), then about us, Contact last.
+              The mobile drawer and the footer use the same order. */}
           <ul className="header__nav">
             <li><Link href="/" className={isActive("/") ? "is-active" : ""}>Home</Link></li>
-            <li><Link href="/about" className={isActive("/about") ? "is-active" : ""}>About</Link></li>
             <li className="has-drop">
               <Link href="/#packages">Tour Packages<i className="caret" /></Link>
               <div className="drop">
@@ -82,8 +84,25 @@ export default function Header() {
                 ))}
               </div>
             </li>
-            <li><Link href="/blog" className={isActive("/blog") ? "is-active" : ""}>Blog</Link></li>
-            <li><Link href="/gallery" className={isActive("/gallery") ? "is-active" : ""}>Gallery</Link></li>
+            <li><Link href="/build-my-journey" className={isActive("/build-my-journey") ? "is-active" : ""}>Build My Journey</Link></li>
+            <li><Link href="/about" className={isActive("/about") ? "is-active" : ""}>About</Link></li>
+            {/* Blog and Gallery live under "More" to keep the bar short enough
+                that the logo never gets squeezed. The mobile drawer and the
+                footer still list them directly. */}
+            <li className="has-drop">
+              <a
+                href="/blog"
+                className={isActive("/blog") || isActive("/gallery") ? "is-active" : ""}
+                aria-haspopup="true"
+                onClick={(e) => e.preventDefault()}
+              >
+                More<i className="caret" />
+              </a>
+              <div className="drop drop--sm">
+                <Link href="/blog" onClick={(e) => e.currentTarget.blur()}>Blog<small>Travel stories &amp; guides</small></Link>
+                <Link href="/gallery" onClick={(e) => e.currentTarget.blur()}>Gallery<small>Photos from the island</small></Link>
+              </div>
+            </li>
             <li><Link href="/contact" className={isActive("/contact") ? "is-active" : ""}>Contact</Link></li>
           </ul>
 
@@ -105,10 +124,11 @@ export default function Header() {
 
       <nav className={"mobile-nav" + (menu ? " is-open" : "")}>
         <Link href="/">Home</Link>
-        <Link href="/about">About</Link>
         {PACKAGES.map((p) => (
           <Link key={p.slug} href={`/packages/${p.slug}`}>{p.name}</Link>
         ))}
+        <Link href="/build-my-journey">Build My Journey</Link>
+        <Link href="/about">About</Link>
         <Link href="/blog">Blog</Link>
         <Link href="/gallery">Gallery</Link>
         <Link href="/contact">Contact</Link>
